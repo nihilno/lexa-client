@@ -1,6 +1,7 @@
-import CTAButton from "@/components/buttons/cta-button";
 import { Badge } from "@/components/ui/badge";
-import { CircleCheck, Clock, Edit2, Trash2 } from "lucide-react";
+import { Clock, Trash2 } from "lucide-react";
+import DialogButton from "../buttons/dialog-button";
+import { FormDrawer } from "../form/form-drawer";
 
 function InvoiceActions() {
   return (
@@ -11,12 +12,18 @@ function InvoiceActions() {
         Pending
       </Badge>
       <div className="space-x-4">
-        <CTAButton
-          label="Mark as Paid"
-          icon={<CircleCheck className="size-5" />}
+        <DialogButton
+          title="Mark as Paid"
+          subtitle="This action will mark this payment status as paid"
         />
-        <CTAButton label="Edit" icon={<Edit2 className="size-5" />} />
-        <CTAButton label="Delete" icon={<Trash2 className="size-5" />} />
+
+        <FormDrawer title="Edit" />
+
+        <DialogButton
+          title="Delete"
+          subtitle="This will permanently delete this invoice from our servers"
+          icon={<Trash2 className="size-5" />}
+        />
       </div>
     </div>
   );

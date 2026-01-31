@@ -12,8 +12,9 @@ function BackButton() {
       variant="ghost"
       className="group"
       onClick={() => navigate(-1)}
+      aria-label="Go back"
     >
-      <ChevronLeft className="size-7 transition-all duration-500 ease-in-out group-hover:-translate-x-1.5" />
+      <ChevronLeft className="slow size-7 group-hover:-translate-x-1.5" />
     </Button>
   );
 }

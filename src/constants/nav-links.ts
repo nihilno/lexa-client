@@ -1,4 +1,3 @@
-import type { LinkItemType } from "@/types";
 import {
   BarChart,
   CodeIcon,
