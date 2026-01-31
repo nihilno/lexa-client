@@ -13,7 +13,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-transparent py-4",
+        "sticky top-0 z-50 w-full border-b border-transparent py-4 transition-all duration-700 ease-in-out",
         {
           "border-border bg-background/95 supports-backdrop-filter:bg-background/50 backdrop-blur-sm":
             scrolled,

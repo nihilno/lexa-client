@@ -25,7 +25,7 @@ export function ModeToggle() {
 
   return (
     <Button variant="outline" onClick={cycleTheme}>
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center justify-between gap-2">
         {icon} <KeyboardShortcut character="m" />
       </div>
       <span className="sr-only">Toggle theme</span>

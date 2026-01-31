@@ -143,8 +143,18 @@
     background: repeating-linear-gradient(
       to right,
       color-mix(in oklch, var(--foreground) 8%, transparent) 0,
-      color-mix(in oklch, var(--foreground) 8%, transparent) 1px,
+      color-mix(in oklch, var(--foreground) 8%, transparent) 0,
       var(--background) 200px
+    );
+  }
+
+  .bg-angled-lines {
+    background: repeating-linear-gradient(
+      45deg,
+      color-mix(in oklch, var(--foreground) 3%, transparent) 0px,
+      color-mix(in oklch, var(--foreground) 3%, transparent) 1px,
+      transparent 1px,
+      transparent 20px
     );
   }
 }
