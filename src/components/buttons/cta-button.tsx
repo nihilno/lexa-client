@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 function CTAButton() {
   return (
     <Button
+      type="button"
       size="lg"
       className="dark:bg-foreground/6 dark:text-foreground dark:hover:bg-foreground/10 focus:ring-foreground/20 rounded-full backdrop-blur-2xl focus:ring-2 dark:border"
     >
