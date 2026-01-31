@@ -133,3 +133,18 @@
     @apply select-none;
   }
 }
+
+@layer utilities {
+  .transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .bg-vertical-lines {
+    background: repeating-linear-gradient(
+      to right,
+      color-mix(in oklch, var(--foreground) 8%, transparent) 0,
+      color-mix(in oklch, var(--foreground) 8%, transparent) 1px,
+      var(--background) 200px
+    );
+  }
+}

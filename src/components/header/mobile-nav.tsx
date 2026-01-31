@@ -1,4 +1,3 @@
-import { LinkItem } from "@/components/sheard";
 import { Button } from "@/components/ui/button";
 import {
   companyLinks,
@@ -10,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { MenuIcon, XIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { LinkItem } from "./sheard";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);

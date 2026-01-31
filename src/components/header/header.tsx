@@ -1,10 +1,10 @@
-import { Logo } from "@/components/logo";
+import { Logo } from "@/components/global/logo";
 import { Button } from "@/components/ui/button";
 import { useScroll } from "@/hooks/use-scroll";
 import { cn } from "@/lib/utils";
 import { NavLink } from "react-router";
+import { ModeToggle } from "../global/theme-toggle";
 import { DesktopNav } from "./desktop-nav";
-import { ModeToggle } from "./global/theme-toggle";
 import { MobileNav } from "./mobile-nav";
 
 export function Header() {
@@ -13,14 +13,14 @@ export function Header() {
   return (
     <header
       className={cn(
-        "py- sticky top-0 z-50 w-full border-b border-transparent py-4",
+        "sticky top-0 z-50 w-full border-b border-transparent py-4",
         {
           "border-border bg-background/95 supports-backdrop-filter:bg-background/50 backdrop-blur-sm":
             scrolled,
         },
       )}
     >
-      <nav className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between px-4">
+      <nav className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between">
         <div className="flex items-center gap-5">
           <NavLink className="hover:bg-accent rounded-md px-3 py-2.5" to="/">
             <Logo className="h-4" />

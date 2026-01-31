@@ -1,4 +1,3 @@
-import { LinkItem } from "@/components/sheard";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,6 +11,7 @@ import {
   companyLinks2,
   productLinks,
 } from "@/constants/nav-links";
+import { LinkItem } from "./sheard";
 
 export function DesktopNav() {
   return (

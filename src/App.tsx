@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router";
 import Layout from "./components/global/layout";
+import Dashboard from "./pages/dashboard";
 
 function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route index element={<h1>Home Page</h1>} />
+        <Route index element={<Dashboard />} />
         <Route path="about">
           <Route index element={<h1>About Page</h1>} />
           <Route path="team" element={<h1>Team Page</h1>} />
