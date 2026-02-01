@@ -57,7 +57,7 @@ function InvoicesContainer() {
           variant="ghost"
           title="Load more"
           aria-label="Load more invoices"
-          className="group border-muted-foreground/35 hover:border-foreground/40 mt-16 w-full rounded-xl border border-dashed sm:col-span-2"
+          className="group border-muted-foreground/35 hover:border-foreground/40 mt-4 w-full rounded-xl border border-dashed sm:col-span-2"
         >
           <ChevronDown className="slow text-foreground/75 size-8 group-hover:translate-y-2" />
         </Button>

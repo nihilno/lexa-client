@@ -23,7 +23,11 @@ export function ModeToggle() {
     );
 
   return (
-    <button className="bg-card h-9 rounded-md border p-1" onClick={cycleTheme}>
+    <button
+      type="button"
+      className="bg-card focus-visible:ring-ring h-9 cursor-pointer rounded-md border p-1 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+      onClick={cycleTheme}
+    >
       <div className="flex items-center justify-between gap-1">
         {icon} <KeyboardShortcut character="m" />
       </div>

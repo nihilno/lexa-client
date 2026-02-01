@@ -422,7 +422,11 @@ function FormUpsert({
             <TableCell>$156.00</TableCell>
             <TableCell>$156.00</TableCell>
             <TableCell className="text-destructive/50 hover:text-destructive ml-auto flex w-fit text-sm transition">
-              <button className="ml-auto flex items-center gap-1">
+              <button
+                className="ml-auto flex items-center gap-1"
+                type="button"
+                aria-label="Delete item"
+              >
                 <Trash className="size-4" />
               </button>
             </TableCell>

@@ -23,6 +23,7 @@ function InvoiceCard() {
           size="icon-sm"
           variant="outline"
           className="group ml-auto sm:w-20"
+          aria-label="View invoice details"
         >
           <Link to="/invoice">
             <ChevronsRight className="size-5 transition-all duration-300 ease-in-out group-hover:translate-x-2 sm:size-6" />

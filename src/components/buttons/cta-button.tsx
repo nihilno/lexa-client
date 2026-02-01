@@ -12,7 +12,7 @@ function CTAButton({ label, icon, href }: CTAButtonProps) {
       asChild
     >
       {href ? (
-        <Link to={href ?? "#"}>
+        <Link to={href}>
           {icon ? icon : <PlusCircle className="size-4 sm:size-5" />}
           <span className="font-medium sm:text-base">{label}</span>
         </Link>
