@@ -1,6 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router";
-import { Button } from "../ui/button";
 
 function BackButton() {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ function BackButton() {
       type="button"
       size="icon"
       variant="ghost"
-      className="group"
+      className="group hidden sm:block"
       onClick={() => navigate(-1)}
       aria-label="Go back"
     >

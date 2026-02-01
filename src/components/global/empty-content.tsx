@@ -1,3 +1,4 @@
+import CTAButton from "@/components/buttons/cta-button";
 import { Button } from "@/components/ui/button";
 import {
   Empty,
@@ -8,7 +9,6 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty";
 import { ArrowUpRightIcon, FileText, LayersPlus, Upload } from "lucide-react";
-import CTAButton from "../buttons/cta-button";
 
 export function EmptyFallback() {
   return (

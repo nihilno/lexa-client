@@ -1,20 +1,19 @@
-import {
-  CheckCircle,
-  ChevronDown,
-  Clock,
-  Hourglass,
-  Search,
-  SlidersHorizontal,
-} from "lucide-react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "@/components/ui/select";
+import {
+  CheckCircle,
+  ChevronDown,
+  Clock,
+  Hourglass,
+  Search,
+} from "lucide-react";
 import InvoiceCard from "./invoice-card";
 
 function InvoicesContainer() {
@@ -23,34 +22,24 @@ function InvoicesContainer() {
       {Array.from({ length: 5 }).map((_, index) => (
         <InvoiceCard key={index} />
       ))}
-      <div className="flex items-center justify-between">
-        <div className="relative">
+      <div className="mx-auto mt-8 grid max-w-2xl grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-x-8">
+        <div className="relative w-full">
           <Input
             placeholder="Search by name..."
             aria-label="Search invoices by name"
-            className="hover:border-foreground/25 max-w-sm min-w-60 pl-8 transition"
+            className="hover:border-foreground/25 pl-8.5 text-sm transition sm:text-base!"
           />
-          <Search className="text-foreground absolute top-1/2 left-2 size-4 -translate-y-1/2" />
+          <Search className="text-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" />
         </div>
-        <Button
-          size="icon"
-          variant="ghost"
-          title="Load more"
-          aria-label="Load more invoices"
-          className="group translate-y-8"
-        >
-          <ChevronDown className="slow size-8 group-hover:translate-y-2" />
-        </Button>
+
         <Select>
           <SelectTrigger
             aria-label="Filter invoices by status"
-            className="hover:border-foreground/25 relative max-w-sm min-w-60 pl-8 transition"
+            className="hover:border-foreground/25 w-full! text-sm transition sm:text-base!"
           >
             <SelectValue placeholder="Filter by status" />
-            <SlidersHorizontal className="text-foreground absolute top-1/2 left-2 size-4 -translate-y-1/2" />
-          </SelectTrigger>{" "}
+          </SelectTrigger>
           <SelectContent>
-            {/* pending: clock, paid: checkcircle, draft: hourglass  */}
             <SelectItem value="paid">
               <CheckCircle className="text-foreground" /> Paid
             </SelectItem>
@@ -62,6 +51,16 @@ function InvoicesContainer() {
             </SelectItem>
           </SelectContent>
         </Select>
+
+        <Button
+          size="icon"
+          variant="ghost"
+          title="Load more"
+          aria-label="Load more invoices"
+          className="group border-muted-foreground/35 hover:border-foreground/40 mt-16 w-full rounded-xl border border-dashed sm:col-span-2"
+        >
+          <ChevronDown className="slow text-foreground/75 size-8 group-hover:translate-y-2" />
+        </Button>
       </div>
     </section>
   );

@@ -1,3 +1,4 @@
+import type { PAYMENT_TERMS } from "@/constants";
 import type { LucideIcon } from "lucide-react";
 
 declare global {
@@ -24,6 +25,8 @@ declare global {
     title?: string;
     icon?: React.ReactNode;
   };
+
+  type Payment = (typeof PAYMENT_TERMS)[keyof typeof PAYMENT_TERMS];
 }
 
 export {};

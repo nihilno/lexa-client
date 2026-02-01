@@ -1,9 +1,28 @@
+import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { PAYMENT_TERMS } from "@/constants";
 import { type FormSchemaType } from "@/lib/schema";
 import { cn } from "@/lib/utils";
@@ -12,7 +31,6 @@ import {
   Building2,
   CheckSquare,
   ChevronDownIcon,
-  Clock,
   CreditCard,
   EllipsisIcon,
   FileText,
@@ -22,29 +40,12 @@ import {
   Mail,
   MapPin,
   PlusIcon,
+  Trash,
   User,
 } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { Button } from "../ui/button";
 import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../ui/table";
+
 function FormUpsert({
   form,
 }: {
@@ -66,7 +67,7 @@ function FormUpsert({
                 <Input
                   {...field}
                   placeholder="19 Union Terrance"
-                  className="hover:border-foreground/25 pl-10 transition"
+                  className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                 />
                 <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
                   <MapPin className="size-4" />
@@ -77,7 +78,7 @@ function FormUpsert({
         )}
       />
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <FormField
           name="fromCity"
           control={form.control}
@@ -91,7 +92,7 @@ function FormUpsert({
                   <Input
                     {...field}
                     placeholder="London"
-                    className="hover:border-foreground/25 pl-10 transition"
+                    className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                   />
                   <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
                     <Building2 className="size-4" />
@@ -114,7 +115,7 @@ function FormUpsert({
                   <Input
                     {...field}
                     placeholder="E1 8QS"
-                    className="hover:border-foreground/25 pl-10 transition"
+                    className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                   />
                   <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
                     <Hash className="size-4" />
@@ -137,7 +138,7 @@ function FormUpsert({
                   <Input
                     {...field}
                     placeholder="United Kingdom"
-                    className="hover:border-foreground/25 pl-10 transition"
+                    className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                   />
                   <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
                     <Globe className="size-4" />
@@ -163,7 +164,7 @@ function FormUpsert({
                 <Input
                   {...field}
                   placeholder="John Doe"
-                  className="hover:border-foreground/25 pl-10 transition"
+                  className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                 />
                 <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
                   <User className="size-4" />
@@ -186,7 +187,7 @@ function FormUpsert({
                 <Input
                   {...field}
                   placeholder="john.doe@example.com"
-                  className="hover:border-foreground/25 pl-10 transition"
+                  className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                 />
                 <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
                   <Mail className="size-4" />
@@ -209,7 +210,7 @@ function FormUpsert({
                 <Input
                   {...field}
                   placeholder="84 Church Way"
-                  className="hover:border-foreground/25 pl-10 transition"
+                  className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                 />
                 <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
                   <MapPin className="size-4" />
@@ -219,7 +220,7 @@ function FormUpsert({
           </FormItem>
         )}
       />
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <FormField
           name="toCity"
           control={form.control}
@@ -233,7 +234,7 @@ function FormUpsert({
                   <Input
                     {...field}
                     placeholder="Bradford"
-                    className="hover:border-foreground/25 pl-10 transition"
+                    className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                   />
                   <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
                     <Building2 className="size-4" />
@@ -256,7 +257,7 @@ function FormUpsert({
                   <Input
                     {...field}
                     placeholder="BD1 4JP"
-                    className="hover:border-foreground/25 pl-10 transition"
+                    className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                   />
                   <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
                     <Hash className="size-4" />
@@ -279,7 +280,7 @@ function FormUpsert({
                   <Input
                     {...field}
                     placeholder="United Kingdom"
-                    className="hover:border-foreground/25 pl-10 transition"
+                    className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                   />
                   <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
                     <Globe className="size-4" />
@@ -307,7 +308,7 @@ function FormUpsert({
                     <Button
                       variant="outline"
                       className={cn(
-                        "w-full justify-between text-left font-normal",
+                        "w-full justify-between text-left text-xs font-normal sm:text-sm!",
                         !field.value && "text-muted-foreground",
                       )}
                     >
@@ -338,21 +339,18 @@ function FormUpsert({
                 Payment Terms
               </FormLabel>
               <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger className="relative w-full pl-10">
-                  <SelectValue placeholder="Net 1" />
-                  <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
-                    <Clock className="size-4" />
-                  </div>
-                </SelectTrigger>
                 <FormControl>
-                  <SelectContent>
-                    {PAYMENT_TERMS.map((term) => (
-                      <SelectItem key={term} value={term}>
-                        {term}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
+                  <SelectTrigger className="relative w-full text-xs sm:text-sm!">
+                    <SelectValue placeholder="Net 1" />
+                  </SelectTrigger>
                 </FormControl>
+                <SelectContent>
+                  {PAYMENT_TERMS.map((term) => (
+                    <SelectItem key={term} value={term}>
+                      {term}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
               </Select>
             </FormItem>
           )}
@@ -371,7 +369,7 @@ function FormUpsert({
                 <Input
                   {...field}
                   placeholder="Graphic Design Service"
-                  className="hover:border-foreground/25 pl-10 transition"
+                  className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                 />
                 <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
                   <FileText className="size-4" />
@@ -418,29 +416,47 @@ function FormUpsert({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {/* <TableRow className="text-foreground/90">
-              <TableCell>Banner Design</TableCell>
-              <TableCell>1</TableCell>
-              <TableCell>$156.00</TableCell>
-              <TableCell className="text-right">$156.00</TableCell>
-            </TableRow>
-            <TableRow className="text-foreground/90">
-              <TableCell>Email Design</TableCell>
-              <TableCell>2</TableCell>
-              <TableCell>$200.00</TableCell>
-              <TableCell className="text-right">$400.00</TableCell>
-            </TableRow> */}
+          <TableRow className="text-foreground/90">
+            <TableCell>Banner Design</TableCell>
+            <TableCell>1</TableCell>
+            <TableCell>$156.00</TableCell>
+            <TableCell>$156.00</TableCell>
+            <TableCell className="text-destructive/50 hover:text-destructive ml-auto flex w-fit text-sm transition">
+              <button className="ml-auto flex items-center gap-1">
+                <Trash className="size-4" />
+              </button>
+            </TableCell>
+          </TableRow>
+          <TableRow className="text-foreground/90">
+            <TableCell>Email Design</TableCell>
+            <TableCell>2</TableCell>
+            <TableCell>$200.00</TableCell>
+            <TableCell>$400.00</TableCell>
+            <TableCell className="text-destructive/50 hover:text-destructive ml-auto flex w-fit text-sm transition">
+              <button className="ml-auto flex items-center gap-1">
+                <Trash className="size-4" />
+              </button>
+            </TableCell>
+          </TableRow>
         </TableBody>
-        <TableFooter>
-          {/* <TableRow className="font-bold">
-              <TableCell colSpan={3}>Amount due</TableCell>
-              <TableCell className="text-right">$556.00</TableCell>
-            </TableRow> */}
-          <TableCell colSpan={5}>
-            <Button className="w-full border" type="button" variant="outline">
-              <PlusIcon />
-            </Button>
-          </TableCell>
+        <TableFooter className="bg-transparent">
+          <TableRow className="font-bold hover:bg-transparent">
+            <TableCell colSpan={5}>
+              <Button
+                className="w-full border"
+                type="button"
+                variant="outline"
+                aria-label="Add item"
+              >
+                <PlusIcon />
+                <span className="sr-only">Add new item</span>
+              </Button>
+            </TableCell>
+          </TableRow>
+          <TableRow className="font-bold hover:bg-transparent">
+            <TableCell colSpan={4}>Amount due</TableCell>
+            <TableCell className="text-right">$556.00</TableCell>
+          </TableRow>
         </TableFooter>
       </Table>
     </div>

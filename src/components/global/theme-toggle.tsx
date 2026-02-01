@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Laptop, Moon, Sun } from "lucide-react";
 import KeyboardShortcut from "./keyboard-shortcut";
 import { useTheme } from "./theme-provider";
@@ -12,7 +11,7 @@ export function ModeToggle() {
     else setTheme("light");
   }
 
-  const iconClasses = "size-5 transition-all duration-300 ease-in-out scale-0";
+  const iconClasses = "size-4 transition-all duration-300 ease-in-out scale-0";
 
   const icon =
     theme === "light" ? (
@@ -24,11 +23,11 @@ export function ModeToggle() {
     );
 
   return (
-    <Button variant="outline" onClick={cycleTheme}>
-      <div className="flex items-center justify-between gap-2">
+    <button className="bg-card h-9 rounded-md border p-1" onClick={cycleTheme}>
+      <div className="flex items-center justify-between gap-1">
         {icon} <KeyboardShortcut character="m" />
       </div>
       <span className="sr-only">Toggle theme</span>
-    </Button>
+    </button>
   );
 }

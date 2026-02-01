@@ -9,8 +9,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import { CheckCircle, CircleCheck, XCircle } from "lucide-react";
-import { Button } from "../ui/button";
 
 function DialogButton({ title, subtitle, icon }: DialogButtonProps) {
   return (
@@ -19,7 +19,7 @@ function DialogButton({ title, subtitle, icon }: DialogButtonProps) {
         <Button
           type="button"
           size="lg"
-          className="dark:bg-foreground/6 dark:text-foreground dark:hover:bg-foreground/10 focus:ring-foreground/20 bg-foreground/80 rounded-full backdrop-blur-2xl focus:ring-2 dark:outline"
+          className="dark:bg-foreground/6 dark:text-foreground dark:hover:bg-foreground/10 focus:ring-foreground/20 bg-foreground/80 w-full rounded-full backdrop-blur-2xl focus:ring-2 md:w-auto dark:outline"
           aria-label={title}
         >
           {icon ?? <CircleCheck className="size-5" />} {title ?? "Proceed"}

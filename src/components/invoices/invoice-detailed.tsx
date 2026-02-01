@@ -1,7 +1,10 @@
-import { CARD_STYLE } from "@/constants";
-import { CheckSquare, CreditCard, FileText, List } from "lucide-react";
-import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
-import { Label } from "../ui/label";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
@@ -10,25 +13,27 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../ui/table";
+} from "@/components/ui/table";
+import { CARD_STYLE } from "@/constants";
+import { CheckSquare, CreditCard, FileText, List } from "lucide-react";
 
 function InvoiceDetailed() {
   return (
     <Card className={CARD_STYLE}>
-      <CardHeader className="flex items-center justify-between border-b border-dashed">
-        <article>
+      <CardHeader className="flex flex-col justify-between gap-8 border-b border-dashed sm:flex-row sm:items-center sm:gap-0">
+        <article className="line-clamp-2">
           <h2 className="text-lg font-bold">#XM9141</h2>
           <h3 className="text-muted-foreground">Graphic Design</h3>
         </article>
-        <ul className="text-muted-foreground text-sm">
+        <ul className="text-muted-foreground line-clamp-4 text-sm">
           <li>19 Union Terrace</li>
           <li>London</li>
           <li>E1 3EZ</li>
           <li>United Kingdom</li>
         </ul>
       </CardHeader>
-      <CardContent className="flex items-center gap-24">
-        <section className="grid w-full grid-cols-3">
+      <CardContent>
+        <section className="grid w-full grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-0">
           <div className="flex flex-col justify-between gap-2">
             <div>
               <Label className="text-muted-foreground text-sm">

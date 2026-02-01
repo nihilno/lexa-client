@@ -1,3 +1,4 @@
+import FormUpsert from "@/components/form/form-upsert";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -9,12 +10,12 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { Form } from "@/components/ui/form";
 import { FormSchema, type FormSchemaType } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle, Edit2, FilePlus, XCircle } from "lucide-react";
+import { CheckCircle, Edit2, Eraser, FilePlus, XCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { Form } from "../ui/form";
-import FormUpsert from "./form-upsert";
+import { toast } from "sonner";
 
 export function FormDrawer({ title, icon }: FormDrawerProps) {
   const form = useForm<FormSchemaType>({
@@ -40,8 +41,10 @@ export function FormDrawer({ title, icon }: FormDrawerProps) {
     mode: "onBlur",
   });
 
-  function onSubmit(data: FormSchemaType) {
-    console.log(data);
+  function onSubmit(formData: FormSchemaType) {
+    console.log(formData);
+    toast.success("Form submitted");
+    // issue date to iso stting
   }
 
   return (
@@ -50,7 +53,7 @@ export function FormDrawer({ title, icon }: FormDrawerProps) {
         <Button
           type="button"
           size="lg"
-          className="dark:bg-foreground/6 dark:text-foreground dark:hover:bg-foreground/10 focus:ring-foreground/20 bg-foreground/80 rounded-full backdrop-blur-2xl focus:ring-2 dark:outline"
+          className="dark:bg-foreground/6 dark:text-foreground dark:hover:bg-foreground/10 focus:ring-foreground/20 bg-foreground/80 w-full rounded-full backdrop-blur-2xl focus:ring-2 md:w-auto dark:outline"
           aria-label={title ?? "Open Form"}
         >
           {icon ?? <Edit2 className="size-5" />} {title ?? "Open Form"}{" "}
@@ -78,6 +81,14 @@ export function FormDrawer({ title, icon }: FormDrawerProps) {
               <Button type="submit">
                 <CheckCircle />
                 Submit
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => form.reset()}
+              >
+                <Eraser />
+                Clear
               </Button>
               <DrawerClose asChild>
                 <Button variant="outline">

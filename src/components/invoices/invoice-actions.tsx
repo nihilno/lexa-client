@@ -1,17 +1,19 @@
+import DialogButton from "@/components/buttons/dialog-button";
+import { FormDrawer } from "@/components/form/form-drawer";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Trash2 } from "lucide-react";
-import DialogButton from "../buttons/dialog-button";
-import { FormDrawer } from "../form/form-drawer";
 
 function InvoiceActions() {
   return (
-    <div className="bg-card/75 flex w-full items-center justify-between rounded-xl border border-dashed p-2">
-      <Badge className="h-10 animate-pulse px-3 text-base">
-        {/* pending: clock, paid: checkcircle, draft: hourglass  */}
-        <Clock className="size-6!" />
-        Pending
-      </Badge>
-      <div className="space-x-4">
+    <div className="bg-card/75 flex w-full flex-col items-center justify-between rounded-xl border border-dashed p-2 sm:flex-row md:flex-row">
+      <div className="pb-2 sm:pb-0">
+        <Badge className="h-10 animate-pulse px-3 text-sm sm:text-base">
+          {/* pending: clock, paid: checkcircle, draft: hourglass  */}
+          <Clock className="size-5! sm:size-6!" />
+          Pending
+        </Badge>
+      </div>
+      <div className="space-y-2 space-x-4 border-t border-dashed pt-4 sm:border-0 sm:pt-0">
         <DialogButton
           title="Mark as Paid"
           subtitle="This action will mark this payment status as paid"

@@ -1,6 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { Link } from "react-router";
-import { Button } from "../ui/button";
 
 function CTAButton({ label, icon, href }: CTAButtonProps) {
   return (
@@ -13,13 +13,13 @@ function CTAButton({ label, icon, href }: CTAButtonProps) {
     >
       {href ? (
         <Link to={href ?? "#"}>
-          {icon ? icon : <PlusCircle className="size-5" />}
-          <span className="text-base font-medium">{label}</span>
+          {icon ? icon : <PlusCircle className="size-4 sm:size-5" />}
+          <span className="font-medium sm:text-base">{label}</span>
         </Link>
       ) : (
         <div className="cursor-pointer">
-          {icon ? icon : <PlusCircle className="size-5" />}
-          <span className="text-base font-medium">{label}</span>
+          {icon ? icon : <PlusCircle className="size-4 sm:size-5" />}
+          <span className="font-medium sm:text-base">{label}</span>
         </div>
       )}
     </Button>
