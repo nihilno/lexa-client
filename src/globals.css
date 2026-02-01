@@ -161,8 +161,8 @@
   .bg-angled-lines {
     background: repeating-linear-gradient(
       45deg,
-      color-mix(in oklch, var(--foreground) 4%, transparent) 0px,
-      color-mix(in oklch, var(--foreground) 4%, transparent) 1px,
+      color-mix(in oklch, var(--foreground) 5%, transparent) 0px,
+      color-mix(in oklch, var(--foreground) 5%, transparent) 1px,
       transparent 1px,
       transparent 20px
     );

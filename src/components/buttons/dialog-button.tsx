@@ -29,8 +29,8 @@ function DialogButton({ title, subtitle, icon }: DialogButtonProps) {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            Do you wish to proceed?&nbsp;{subtitle}.
-          </AlertDialogDescription>
+            Do you wish to proceed?{subtitle && <>&nbsp;{subtitle}.</>}
+          </AlertDialogDescription>{" "}
         </AlertDialogHeader>
         <AlertDialogFooter className="border-t border-dashed pt-4">
           <AlertDialogCancel>

@@ -62,30 +62,32 @@ function InvoiceDetailed() {
       <CardFooter className="bg-angled-lines border-border/50 mx-6 mt-8 rounded-xl border p-6">
         <Table>
           <TableHeader>
-            <TableHead className="text-muted-foreground text-sm">
-              <div className="flex items-center gap-1">
-                <FileText className="size-4" />
-                Item Name
-              </div>
-            </TableHead>
-            <TableHead className="text-muted-foreground text-sm">
-              <div className="flex items-center gap-1">
-                <List className="size-4" />
-                Qty.
-              </div>
-            </TableHead>
-            <TableHead className="text-muted-foreground text-sm">
-              <div className="flex items-center gap-1">
-                <CreditCard className="size-4" />
-                Price
-              </div>
-            </TableHead>
-            <TableHead className="text-muted-foreground flex w-full text-sm">
-              <div className="ml-auto flex items-center gap-1">
-                <CheckSquare className="size-4" />
-                Total
-              </div>
-            </TableHead>
+            <TableRow>
+              <TableHead className="text-muted-foreground text-sm">
+                <div className="flex items-center gap-1">
+                  <FileText className="size-4" />
+                  Item Name
+                </div>
+              </TableHead>
+              <TableHead className="text-muted-foreground text-sm">
+                <div className="flex items-center gap-1">
+                  <List className="size-4" />
+                  Qty.
+                </div>
+              </TableHead>
+              <TableHead className="text-muted-foreground text-sm">
+                <div className="flex items-center gap-1">
+                  <CreditCard className="size-4" />
+                  Price
+                </div>
+              </TableHead>
+              <TableHead className="text-muted-foreground flex w-full text-sm">
+                <div className="ml-auto flex items-center gap-1">
+                  <CheckSquare className="size-4" />
+                  Total
+                </div>
+              </TableHead>
+            </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow className="text-foreground/90">
