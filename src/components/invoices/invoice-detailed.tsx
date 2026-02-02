@@ -1,4 +1,4 @@
-import { formatId } from "@/api/invoices/utilts";
+import { formatId } from "@/api/invoices/utils";
 import {
   Card,
   CardContent,

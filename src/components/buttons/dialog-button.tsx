@@ -1,3 +1,4 @@
+import { useMarkInvoiceAsPaid } from "@/api/invoices/mutations";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,8 +12,14 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, CircleCheck, XCircle } from "lucide-react";
+import { toast } from "sonner";
 
-function DialogButton({ title, subtitle, icon }: DialogButtonProps) {
+function DialogButton({ title, subtitle, icon, id }: DialogButtonProps) {
+  const { mutate: markAsPaid, isPending } = useMarkInvoiceAsPaid();
+  function onDelete() {
+    toast.error("Delete functionality not implemented yet");
+  }
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -36,9 +43,15 @@ function DialogButton({ title, subtitle, icon }: DialogButtonProps) {
           <AlertDialogCancel>
             <XCircle /> Cancel
           </AlertDialogCancel>
-          <AlertDialogAction>
-            <CheckCircle />
-            Continue
+          <AlertDialogAction asChild>
+            <Button
+              variant={title === "Delete" ? "destructive" : "default"}
+              onClick={title === "Delete" ? onDelete : () => markAsPaid(id!)}
+              disabled={isPending}
+            >
+              <CheckCircle />
+              Continue
+            </Button>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

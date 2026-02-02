@@ -1,4 +1,4 @@
-import { formatPrice } from "@/api/invoices/utilts";
+import { formatPrice } from "@/api/invoices/utils";
 import {
   Table,
   TableBody,

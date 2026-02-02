@@ -10,6 +10,7 @@ declare global {
   };
 
   type DialogButtonProps = {
+    id?: string;
     title?: string;
     subtitle?: string;
     icon?: React.ReactNode;

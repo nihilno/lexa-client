@@ -1,5 +1,4 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ChevronsUpDown } from "lucide-react";
 import InvoiceCard from "./invoice-card";
 import InvoiceFilters from "./invoice-filters";
 

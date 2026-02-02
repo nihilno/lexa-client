@@ -1,4 +1,4 @@
-import { formatId, formatPrice } from "@/api/invoices/utilts";
+import { formatId, formatPrice } from "@/api/invoices/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CARD_STYLE } from "@/constants";
@@ -9,7 +9,6 @@ import Status from "./status";
 
 function InvoiceCard({ invoice }: { invoice: Invoice }) {
   const { id, paymentDue, status, totalPayment } = invoice;
-  console.log(invoice);
 
   return (
     <Card className={CARD_STYLE}>

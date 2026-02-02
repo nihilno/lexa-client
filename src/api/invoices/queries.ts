@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-export async function getInvoices() {
+async function getInvoices() {
   const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/invoices`);
   if (!response.ok) {
     throw new Error("Failed to fetch invoices");
@@ -9,7 +9,7 @@ export async function getInvoices() {
   return invoices;
 }
 
-export async function getInvoiceById(id: string) {
+async function getInvoiceById(id: string) {
   const response = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}/invoices/${id}`,
   );
