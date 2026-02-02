@@ -1,4 +1,4 @@
-import { queryClient } from "@/lib/queryClient";
+import { queryClient } from "@/lib/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "./global/theme-provider";
 import { Toaster } from "./ui/sonner";

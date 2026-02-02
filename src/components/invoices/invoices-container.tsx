@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import InvoiceCard from "./invoice-card";
 
-function InvoicesContainer() {
+function InvoicesContainer({ invoices }: { invoices: Invoice[] }) {
   return (
     <section className="space-y-4">
       {Array.from({ length: 5 }).map((_, index) => (
