@@ -8,7 +8,6 @@ function InvoiceActions() {
     <div className="bg-card/75 flex w-full flex-col items-center justify-between rounded-xl border border-dashed p-2 sm:flex-row md:flex-row">
       <div className="pb-2 sm:pb-0">
         <Badge className="h-10 animate-pulse px-3 text-sm sm:text-base">
-          {/* pending: clock, paid: checkcircle, draft: hourglass  */}
           <Clock className="size-5! sm:size-6!" />
           Pending
         </Badge>

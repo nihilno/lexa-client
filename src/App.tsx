@@ -8,7 +8,7 @@ function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Dashboard />} />
-        <Route path="invoice" element={<InvoiceDetails />} />
+        <Route path="invoices/:id" element={<InvoiceDetails />} />
       </Route>
 
       <Route path="*" element={<h1>404 Not Found</h1>} />

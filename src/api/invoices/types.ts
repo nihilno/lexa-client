@@ -1,25 +1,57 @@
 declare global {
   type Invoice = {
-    number: number;
+    totalPayment: number;
     id: string;
     description: string;
     senderName: string;
-    senderAddress: string;
+    senderEmail: string;
+    senderStreet: string;
     senderCity: string;
     senderPostalCode: string;
     senderCountry: string;
     recipientName: string;
-    recipientAddress: string;
+    recipientEmail: string;
+    recipientStreet: string;
     recipientCity: string;
     recipientPostalCode: string;
     recipientCountry: string;
     createdAt: Date;
     updatedAt: Date;
     paymentDue: Date;
+    status: "Draft" | "Pending" | "Paid";
+    userId: string;
+  };
+
+  type Item = {
+    id: string;
+    name: string;
+    quantity: number;
+    price: number;
+    invoiceId: string;
+  };
+
+  type InvoiceWithItems = {
     totalPayment: number;
-    status: "DRAFT" | "PENDING" | "PAID";
+    items: Item[];
+    id: string;
+    description: string;
+    senderName: string;
+    senderEmail: string;
+    senderStreet: string;
+    senderCity: string;
+    senderPostalCode: string;
+    senderCountry: string;
+    recipientName: string;
+    recipientEmail: string;
+    recipientStreet: string;
+    recipientCity: string;
+    recipientPostalCode: string;
+    recipientCountry: string;
+    createdAt: Date;
+    updatedAt: Date;
+    paymentDue: Date;
+    status: "Draft" | "Pending" | "Paid";
     userId: string;
   };
 }
-
 export {};

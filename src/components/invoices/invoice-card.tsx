@@ -1,23 +1,26 @@
-import { Badge } from "@/components/ui/badge";
+import { formatId, formatPrice } from "@/api/invoices/utilts";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CARD_STYLE } from "@/constants";
-import { Calendar, CheckCircle, ChevronsRight } from "lucide-react";
+import { format } from "date-fns";
+import { Calendar, ChevronsRight } from "lucide-react";
 import { Link } from "react-router";
+import Status from "./status";
 
-function InvoiceCard() {
+function InvoiceCard({ invoice }: { invoice: Invoice }) {
+  const { id, paymentDue, status, totalPayment } = invoice;
+  console.log(invoice);
+
   return (
     <Card className={CARD_STYLE}>
-      <CardContent className="flex items-center gap-8 text-xs sm:text-sm md:gap-16 md:text-base lg:gap-24">
-        <h3 className="hidden sm:block">#RT3080</h3>
+      <CardContent className="grid grid-cols-[1fr_1fr_1fr] items-center gap-[5vw] sm:grid-cols-[1fr_1fr_1fr_1fr_1fr] sm:gap-4">
+        <h3 className="hidden sm:block">{formatId(id)}</h3>
         <p className="flex w-fit items-center gap-1 whitespace-nowrap">
-          <Calendar className="size-4.5 shrink-0" /> Due 19 Aug 2021
+          <Calendar className="size-4.5 shrink-0" /> Due{" "}
+          {format(paymentDue, "MM/dd/yyyy")}
         </p>
-        <p>$1,800.90</p>
-        <Badge className="hidden px-4 text-sm sm:flex">
-          <CheckCircle />
-          Paid
-        </Badge>
+        <p>{formatPrice(totalPayment)}</p>
+        <Status status={status} />
         <Button
           asChild
           size="icon-sm"
@@ -25,7 +28,7 @@ function InvoiceCard() {
           className="group ml-auto sm:w-20"
           aria-label="View invoice details"
         >
-          <Link to="/invoice">
+          <Link to={`/invoices/${id}`}>
             <ChevronsRight className="size-5 transition-all duration-300 ease-in-out group-hover:translate-x-2 sm:size-6" />
           </Link>
         </Button>
