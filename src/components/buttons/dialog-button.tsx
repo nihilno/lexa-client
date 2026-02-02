@@ -1,4 +1,7 @@
-import { useMarkInvoiceAsPaid } from "@/api/invoices/mutations";
+import {
+  useDeleteInvoice,
+  useMarkInvoiceAsPaid,
+} from "@/api/invoices/mutations";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,10 +19,21 @@ import { toast } from "sonner";
 
 function DialogButton({ title, subtitle, icon, id }: DialogButtonProps) {
   const { mutate: markAsPaid, isPending } = useMarkInvoiceAsPaid();
-  function onDelete() {
-    toast.error("Delete functionality not implemented yet");
-  }
+  const { mutate: deleteInvoice, isPending: isDeleting } = useDeleteInvoice();
 
+  function handleConfirm() {
+    if (!id) {
+      toast.error("Missing invoice ID");
+      return;
+    }
+
+    if (title === "Delete") {
+      deleteInvoice(id);
+      return;
+    }
+
+    markAsPaid(id);
+  }
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -46,8 +60,8 @@ function DialogButton({ title, subtitle, icon, id }: DialogButtonProps) {
           <AlertDialogAction asChild>
             <Button
               variant={title === "Delete" ? "destructive" : "default"}
-              onClick={title === "Delete" ? onDelete : () => markAsPaid(id!)}
-              disabled={isPending}
+              onClick={handleConfirm}
+              disabled={isPending || isDeleting}
             >
               <CheckCircle />
               Continue
