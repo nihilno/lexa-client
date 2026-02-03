@@ -26,7 +26,7 @@ function Dashboard() {
 
       <section className="md:grid md:grid-cols-[1fr_min-content] md:gap-4">
         <div>
-          <div className="mb-4 flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
+          <div className="mb-4 flex w-full flex-col items-center gap-4 sm:flex-row sm:justify-between">
             <Badge className="text-xs sm:text-base">
               There are {invoices.length}{" "}
               <span className="hidden sm:inline">total</span> invoices

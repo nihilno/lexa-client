@@ -18,8 +18,9 @@ function Status({
   return (
     <Badge
       className={cn(
-        "hidden px-4 text-sm sm:flex",
-        size === "lg" && "h-10 animate-pulse sm:text-base!",
+        "px-4 text-sm",
+        size === "lg" && "h-10 w-full sm:w-30 sm:text-base!",
+        size === "sm" && "hidden sm:flex",
       )}
     >
       {icon[status]}

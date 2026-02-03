@@ -14,11 +14,12 @@ function InvoiceActions({
   const { data: invoice } = useSingleInvoice(id);
 
   return (
-    <div className="bg-card/75 flex w-full flex-col items-center justify-between rounded-xl border border-dashed p-2 sm:flex-row md:flex-row">
-      <div className="pb-2 sm:pb-0">
+    <div className="bg-card/75 flex w-full flex-col items-center justify-between gap-2 rounded-xl border border-dashed p-2 sm:flex-row md:flex-row">
+      <div className="border-muted-foreground/50 mb-2 w-full border-b border-dashed pb-4 sm:border-b-0 sm:pb-0">
         <Status status={status} size="lg" />
       </div>
-      <div className="flex space-y-2 space-x-4 border-t border-dashed pt-4 sm:border-0 sm:pt-0">
+
+      <div className="flex w-full flex-col items-center justify-end gap-2 sm:flex-row">
         {status !== "Paid" && (
           <DialogButton
             id={id}

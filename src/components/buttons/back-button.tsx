@@ -11,7 +11,7 @@ function BackButton() {
       size="icon"
       variant="ghost"
       className="group hidden sm:block"
-      onClick={() => navigate("/")}
+      onClick={() => navigate("/invoices")}
       aria-label="Go back"
     >
       <ChevronLeft className="slow size-7 group-hover:-translate-x-1.5" />

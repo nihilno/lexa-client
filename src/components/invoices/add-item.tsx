@@ -16,7 +16,7 @@ function AddItem({ form, index, remove, fields }: AddItemProps) {
         render={({ field }) => (
           <FormItem>
             <FormControl>
-              <Input type="text" {...field} />
+              <Input type="text" {...field} className="text-xs sm:text-sm" />
             </FormControl>
           </FormItem>
         )}
@@ -28,13 +28,12 @@ function AddItem({ form, index, remove, fields }: AddItemProps) {
           <FormItem>
             <FormControl>
               <Input
-                min={1}
-                max={99}
+                className="text-xs sm:text-sm"
                 value={field.value}
                 onChange={(e) => field.onChange(Number(e.target.value))}
               />
             </FormControl>
-            <FormMessage />
+            <FormMessage />{" "}
           </FormItem>
         )}
       />
@@ -45,6 +44,7 @@ function AddItem({ form, index, remove, fields }: AddItemProps) {
           <FormItem>
             <FormControl>
               <Input
+                className="text-xs sm:text-sm"
                 type="number"
                 step="any"
                 min={1}

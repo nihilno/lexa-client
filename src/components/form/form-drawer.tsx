@@ -74,8 +74,10 @@ export function FormDrawer({ type, invoice, id }: FormDrawerProps) {
   const { mutate: editInvoice, isPending: isEditing } = useEditInvoice(id!);
 
   function onSubmit(formData: FormSchemaType) {
-    if (isCreating || isEditing)
+    if (isCreating || isEditing) {
       toast.loading("Please wait for the current operation to finish.");
+      return;
+    }
 
     if (type === "Insert") createInvoice(formData);
     if (type === "Edit" && invoice?.id) editInvoice(formData);
@@ -87,7 +89,7 @@ export function FormDrawer({ type, invoice, id }: FormDrawerProps) {
         <Button
           type="button"
           size="lg"
-          className="dark:bg-foreground/6 dark:text-foreground dark:hover:bg-foreground/10 focus:ring-foreground/20 bg-foreground/80 w-full rounded-full backdrop-blur-2xl focus:ring-2 md:w-auto dark:outline"
+          className="dark:bg-foreground/6 dark:text-foreground dark:hover:bg-foreground/10 focus:ring-foreground/20 bg-foreground/80 w-full rounded-full backdrop-blur-2xl focus:ring-2 sm:w-auto dark:outline"
           aria-label={isInsert ? "New Invoice" : "Edit Invoice"}
         >
           {isInsert ? (
@@ -119,10 +121,12 @@ export function FormDrawer({ type, invoice, id }: FormDrawerProps) {
             <FormUpsert form={form} />
 
             <DrawerFooter className="bg-angled-lines mt-4 border-t pt-4">
-              <Button type="submit" disabled={isCreating}>
-                <CheckCircle />
-                Submit
-              </Button>
+              <DrawerClose asChild>
+                <Button type="submit" disabled={isCreating || isEditing}>
+                  <CheckCircle />
+                  Submit
+                </Button>
+              </DrawerClose>
               <Button
                 type="button"
                 variant="outline"

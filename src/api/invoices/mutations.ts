@@ -102,7 +102,7 @@ export function useDeleteInvoice() {
       queryClient.invalidateQueries({
         queryKey: ["invoice", deletedInvoice.id],
       });
-      navigate("/", { replace: true });
+      navigate("/invoices", { replace: true });
     },
     onError: (error) => {
       toast.error(error.message);
@@ -120,7 +120,7 @@ export function useCreateInvoice() {
       toast.success(
         `Invoice: ${createdInvoice.projectDescription} was created successfully.`,
       );
-      navigate("/", {
+      navigate("/invoices", {
         replace: true,
       });
       queryClient.invalidateQueries({
@@ -135,7 +135,6 @@ export function useCreateInvoice() {
 
 export function useEditInvoice(id: string) {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   return useMutation({
     mutationFn: (formData: FormSchemaType) => editInvoice(formData, id),
@@ -149,9 +148,6 @@ export function useEditInvoice(id: string) {
       toast.success(
         `Invoice: ${updatedInvoice.projectDescription} was updated successfully.`,
       );
-      navigate("/", {
-        replace: true,
-      });
     },
     onError: (error) => {
       toast.error(error.message);

@@ -1,11 +1,12 @@
 "use client";
 import Logo from "@/components/global/logo";
+import { ModeToggle } from "@/components/global/theme-toggle";
 import { MobileNav } from "@/components/header/mobile-nav";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { NAVLINKS } from "@/constants";
 import { useScroll } from "@/hooks/use-scroll";
 import { cn } from "@/lib/utils";
-import { ModeToggle } from "../global/theme-toggle";
+import { Link } from "react-router";
 
 export function Header() {
   const scrolled = useScroll(10);
@@ -21,10 +22,12 @@ export function Header() {
       )}
     >
       <nav className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between px-4">
-        <Logo />
-        <ModeToggle />
+        <div className="flex items-center gap-2">
+          <Logo />
+          <ModeToggle />
+        </div>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-2 md:flex">
           {NAVLINKS.map((link, i) => (
             <a
               className={buttonVariants({ variant: "ghost" })}
@@ -34,8 +37,12 @@ export function Header() {
               {link.label}
             </a>
           ))}
-          <Button variant="outline">Sign In</Button>
-          <Button>Get Started</Button>
+          <Button variant="outline">
+            <Link to="/login">Sign In</Link>
+          </Button>
+          <Button>
+            <Link to="/register">Get Started</Link>
+          </Button>
         </div>
         <MobileNav />
       </nav>
