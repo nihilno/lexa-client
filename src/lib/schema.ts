@@ -46,13 +46,18 @@ const FormSchema = z.object({
     .min(3, "Project description must be at least 3 characters long.")
     .max(200),
 
-  items: z.array(
-    z.object({
-      name: z.string().min(1, "Item name is required.").max(100),
-      quantity: z.number().min(1, "Quantity must be at least 1."),
-      price: z.number().min(1, "Price must be at least 1."),
-    }),
-  ),
+  items: z
+    .array(
+      z.object({
+        name: z.string().min(1, "Item name is required.").max(100),
+        quantity: z
+          .number()
+          .min(1, "Quantity must be at least 1.")
+          .max(99, "Quantity must be at most 99."),
+        price: z.number().min(1, "Price must be at least 1.").max(999999),
+      }),
+    )
+    .min(1, "At least one item is required."),
 });
 
 type FormSchemaType = z.infer<typeof FormSchema>;

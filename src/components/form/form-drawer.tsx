@@ -1,3 +1,4 @@
+import { useCreateInvoice } from "@/api/invoices/mutations";
 import FormUpsert from "@/components/form/form-upsert";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,44 +16,44 @@ import { FormSchema, type FormSchemaType } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle, Edit2, Eraser, FilePlus, XCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
-export function FormDrawer({ type, icon }: FormDrawerProps) {
+export function FormDrawer({ type }: FormDrawerProps) {
   const isInsert = type === "Insert";
 
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      fromStreet: "",
-      fromCity: "",
-      fromPostCode: "",
-      fromCountry: "",
+      fromStreet: "Maciej",
+      fromCity: "Maciej",
+      fromPostCode: "Maciej",
+      fromCountry: "Maciej",
 
-      toName: "",
-      toEmail: "",
-      toStreet: "",
-      toCity: "",
-      toPostCode: "",
-      toCountry: "",
+      toName: "Maciej",
+      toEmail: "maciej.polowy1@gmail.com",
+      toStreet: "Maciej",
+      toCity: "Maciej",
+      toPostCode: "Maciej",
+      toCountry: "Maciej",
 
       issueDate: undefined,
       paymentTerms: "Net 1",
-      projectDescription: "",
+      projectDescription: "Maciej",
       items: [
         {
-          name: "",
+          name: "Maciej1",
           quantity: 1,
-          price: 0,
+          price: 100,
         },
       ],
     },
     mode: "onBlur",
   });
 
+  const { mutate } = useCreateInvoice();
+
   function onSubmit(formData: FormSchemaType) {
     console.log(formData);
-    toast.success("Form submitted");
-    // issue date to iso stting
+    mutate(formData);
   }
 
   return (
@@ -64,14 +65,18 @@ export function FormDrawer({ type, icon }: FormDrawerProps) {
           className="dark:bg-foreground/6 dark:text-foreground dark:hover:bg-foreground/10 focus:ring-foreground/20 bg-foreground/80 w-full rounded-full backdrop-blur-2xl focus:ring-2 md:w-auto dark:outline"
           aria-label={isInsert ? "New Invoice" : "Edit Invoice"}
         >
-          {icon ?? <Edit2 className="size-5" />}{" "}
-          {isInsert ? "New Invoice" : "Edit Invoice"}{" "}
+          {isInsert ? (
+            <FilePlus className="size-5" />
+          ) : (
+            <Edit2 className="size-5" />
+          )}{" "}
+          {isInsert ? "New Invoice" : "Edit Invoice"}
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="bg-angled-lines border-b shadow">
           <DrawerTitle className="flex items-center gap-2">
-            <FilePlus />
+            {isInsert ? <FilePlus /> : <Edit2 />}
             {isInsert ? "New Invoice" : "Edit Invoice"}
           </DrawerTitle>
           <DrawerDescription>

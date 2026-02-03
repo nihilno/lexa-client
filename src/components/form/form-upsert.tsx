@@ -78,7 +78,6 @@ function FormUpsert({
           </FormItem>
         )}
       />
-
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <FormField
           name="fromCity"
@@ -150,7 +149,6 @@ function FormUpsert({
           )}
         />
       </div>
-
       <Label className="mt-8 mb-4 text-base">Bill To</Label>
       <FormField
         name="toName"
@@ -292,7 +290,6 @@ function FormUpsert({
           )}
         />
       </div>
-
       <div className="mt-12 grid grid-cols-2 gap-4">
         <FormField
           control={form.control}
@@ -380,7 +377,6 @@ function FormUpsert({
           </FormItem>
         )}
       />
-
       <Label className="mt-8 mb-4 text-base">Item List</Label>
       <Table>
         <TableHeader>
@@ -412,18 +408,24 @@ function FormUpsert({
           </TableRow>
         </TableHeader>
       </Table>
-
       {fields.map((field, index) => (
-        <AddItem key={field.id} form={form} index={index} remove={remove} />
+        <AddItem
+          key={field.id}
+          form={form}
+          index={index}
+          remove={remove}
+          fields={fields}
+        />
       ))}
-
       <Button
         variant="outline"
         type="button"
         className="mt-4 w-full"
         onClick={() => append({ name: "", quantity: 1, price: 0 })}
+        aria-label="Add item"
       >
-        <Plus />
+        <Plus className="mr-2 h-4 w-4" />
+        Add Item
       </Button>
     </div>
   );

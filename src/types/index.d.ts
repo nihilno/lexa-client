@@ -1,4 +1,5 @@
 import type { PAYMENT_TERMS } from "@/constants";
+import type { FormSchemaType } from "@/lib/schema";
 import type { LucideIcon } from "lucide-react";
 
 declare global {
@@ -24,13 +25,18 @@ declare global {
 
   type FormDrawerProps = {
     type: "Insert" | "Edit";
-    icon?: React.ReactNode;
   };
 
   type AddItemProps = {
     form: ReturnType<typeof useForm<FormSchemaType>>;
     index: number;
     remove: (index: number) => void;
+    fields: {
+      name: string;
+      quantity: number;
+      price: number;
+      id: string;
+    }[];
   };
 
   type Payment = (typeof PAYMENT_TERMS)[keyof typeof PAYMENT_TERMS];

@@ -1,4 +1,3 @@
-import CTAButton from "@/components/buttons/cta-button";
 import { Button } from "@/components/ui/button";
 import {
   Empty,
@@ -8,7 +7,8 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { ArrowUpRightIcon, FileText, LayersPlus, Upload } from "lucide-react";
+import { ArrowUpRightIcon, FileText, Upload } from "lucide-react";
+import { FormDrawer } from "../form/form-drawer";
 
 export function EmptyFallback() {
   return (
@@ -24,10 +24,8 @@ export function EmptyFallback() {
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent className="flex-row justify-center gap-2">
-        <CTAButton
-          label="New Invoice"
-          icon={<LayersPlus className="size-5" />}
-        />
+        <FormDrawer type="Insert" />
+
         <Button variant="outline">
           <Upload />
           Import Invoice

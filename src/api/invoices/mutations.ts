@@ -1,3 +1,4 @@
+import type { FormSchemaType } from "@/lib/schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
@@ -29,6 +30,23 @@ async function deleteInvoice(id: string) {
   }
 
   const data: { invoice: Invoice } = await response.json();
+  return data.invoice;
+}
+
+async function createInvoice(formData: FormSchemaType) {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/invoices`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create new invoice");
+  }
+
+  const data: { invoice: InvoiceWithItems } = await response.json();
   return data.invoice;
 }
 
@@ -67,6 +85,29 @@ export function useDeleteInvoice() {
     },
     onError: () => {
       toast.error("Failed to delete this invoice. Try again later.");
+    },
+  });
+}
+
+export function useCreateInvoice() {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  return useMutation({
+    mutationFn: createInvoice,
+    onSuccess: (updatedInvoice) => {
+      toast.success(
+        `Invoice for ${updatedInvoice.projectDescription} was created successfully.`,
+      );
+      navigate("/", {
+        replace: true,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["invoices"],
+      });
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 }
