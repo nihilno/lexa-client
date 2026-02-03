@@ -17,7 +17,9 @@ import { CheckCircle, Edit2, Eraser, FilePlus, XCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-export function FormDrawer({ title, icon }: FormDrawerProps) {
+export function FormDrawer({ type, icon }: FormDrawerProps) {
+  const isInsert = type === "Insert";
+
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -36,7 +38,13 @@ export function FormDrawer({ title, icon }: FormDrawerProps) {
       issueDate: undefined,
       paymentTerms: "Net 1",
       projectDescription: "",
-      items: [] as FormSchemaType["items"],
+      items: [
+        {
+          name: "",
+          quantity: 1,
+          price: 0,
+        },
+      ],
     },
     mode: "onBlur",
   });
@@ -48,25 +56,28 @@ export function FormDrawer({ title, icon }: FormDrawerProps) {
   }
 
   return (
-    <Drawer direction="left" handleOnly={true}>
+    <Drawer direction={isInsert ? "left" : "right"} handleOnly={true}>
       <DrawerTrigger asChild>
         <Button
           type="button"
           size="lg"
           className="dark:bg-foreground/6 dark:text-foreground dark:hover:bg-foreground/10 focus:ring-foreground/20 bg-foreground/80 w-full rounded-full backdrop-blur-2xl focus:ring-2 md:w-auto dark:outline"
-          aria-label={title ?? "Open Form"}
+          aria-label={isInsert ? "New Invoice" : "Edit Invoice"}
         >
-          {icon ?? <Edit2 className="size-5" />} {title ?? "Open Form"}{" "}
+          {icon ?? <Edit2 className="size-5" />}{" "}
+          {isInsert ? "New Invoice" : "Edit Invoice"}{" "}
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="bg-angled-lines border-b shadow">
           <DrawerTitle className="flex items-center gap-2">
             <FilePlus />
-            New Invoice
+            {isInsert ? "New Invoice" : "Edit Invoice"}
           </DrawerTitle>
           <DrawerDescription>
-            Create a new invoice using the form below.
+            {isInsert
+              ? "Create a new invoice using the form below."
+              : "Edit the invoice using the form below."}
           </DrawerDescription>
         </DrawerHeader>
 

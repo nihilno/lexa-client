@@ -50,7 +50,7 @@ const FormSchema = z.object({
     z.object({
       name: z.string().min(1, "Item name is required.").max(100),
       quantity: z.number().min(1, "Quantity must be at least 1."),
-      price: z.number().min(0, "Price must be at least 0."),
+      price: z.number().min(1, "Price must be at least 1."),
     }),
   ),
 });

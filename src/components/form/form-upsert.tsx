@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -14,22 +20,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PAYMENT_TERMS } from "@/constants";
 import { type FormSchemaType } from "@/lib/schema";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import {
   Building2,
-  CheckSquare,
   ChevronDownIcon,
   CreditCard,
   EllipsisIcon,
@@ -39,18 +36,22 @@ import {
   List,
   Mail,
   MapPin,
-  PlusIcon,
-  Trash,
+  Plus,
   User,
 } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import { useFieldArray, useForm } from "react-hook-form";
+import AddItem from "../invoices/add-item";
 
 function FormUpsert({
   form,
 }: {
   form: ReturnType<typeof useForm<FormSchemaType>>;
 }) {
+  const { fields, remove, append } = useFieldArray({
+    control: form.control,
+    name: "items",
+  });
+
   return (
     <div className="space-y-3 px-4">
       <Label className="mb-4 text-base">Bill From</Label>
@@ -402,12 +403,7 @@ function FormUpsert({
                 Price
               </div>
             </TableHead>
-            <TableHead className="text-muted-foreground text-sm">
-              <div className="flex items-center gap-1">
-                <CheckSquare className="size-4" />
-                Total
-              </div>
-            </TableHead>
+
             <TableHead className="text-muted-foreground flex w-full text-sm">
               <div className="ml-auto flex items-center gap-1">
                 <EllipsisIcon className="size-4" />
@@ -415,54 +411,20 @@ function FormUpsert({
             </TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          <TableRow className="text-foreground/90">
-            <TableCell>Banner Design</TableCell>
-            <TableCell>1</TableCell>
-            <TableCell>$156.00</TableCell>
-            <TableCell>$156.00</TableCell>
-            <TableCell className="text-destructive/50 hover:text-destructive ml-auto flex w-fit text-sm transition">
-              <button
-                className="ml-auto flex items-center gap-1"
-                type="button"
-                aria-label="Delete item"
-              >
-                <Trash className="size-4" />
-              </button>
-            </TableCell>
-          </TableRow>
-          <TableRow className="text-foreground/90">
-            <TableCell>Email Design</TableCell>
-            <TableCell>2</TableCell>
-            <TableCell>$200.00</TableCell>
-            <TableCell>$400.00</TableCell>
-            <TableCell className="text-destructive/50 hover:text-destructive ml-auto flex w-fit text-sm transition">
-              <button className="ml-auto flex items-center gap-1">
-                <Trash className="size-4" />
-              </button>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-        <TableFooter className="bg-transparent">
-          <TableRow className="font-bold hover:bg-transparent">
-            <TableCell colSpan={5}>
-              <Button
-                className="w-full border"
-                type="button"
-                variant="outline"
-                aria-label="Add item"
-              >
-                <PlusIcon />
-                <span className="sr-only">Add new item</span>
-              </Button>
-            </TableCell>
-          </TableRow>
-          <TableRow className="font-bold hover:bg-transparent">
-            <TableCell colSpan={4}>Amount due</TableCell>
-            <TableCell className="text-right">$556.00</TableCell>
-          </TableRow>
-        </TableFooter>
       </Table>
+
+      {fields.map((field, index) => (
+        <AddItem key={field.id} form={form} index={index} remove={remove} />
+      ))}
+
+      <Button
+        variant="outline"
+        type="button"
+        className="mt-4 w-full"
+        onClick={() => append({ name: "", quantity: 1, price: 0 })}
+      >
+        <Plus />
+      </Button>
     </div>
   );
 }

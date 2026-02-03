@@ -23,8 +23,14 @@ declare global {
   };
 
   type FormDrawerProps = {
-    title?: string;
+    type: "Insert" | "Edit";
     icon?: React.ReactNode;
+  };
+
+  type AddItemProps = {
+    form: ReturnType<typeof useForm<FormSchemaType>>;
+    index: number;
+    remove: (index: number) => void;
   };
 
   type Payment = (typeof PAYMENT_TERMS)[keyof typeof PAYMENT_TERMS];

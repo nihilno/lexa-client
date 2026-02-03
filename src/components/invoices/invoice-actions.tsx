@@ -23,7 +23,7 @@ function InvoiceActions({
             subtitle="This action will mark this payment status as paid"
           />
         )}
-        <FormDrawer title="Edit" />
+        <FormDrawer type="Edit" />
 
         <DialogButton
           id={id}

@@ -1,10 +1,10 @@
 import { useInvoices } from "@/api/invoices/queries";
-import CTAButton from "@/components/buttons/cta-button";
+import { FormDrawer } from "@/components/form/form-drawer";
 import EmptyFallback from "@/components/global/empty-content";
 import Loader from "@/components/global/loader";
 import InvoicesContainer from "@/components/invoices/invoices-container";
 import { Badge } from "@/components/ui/badge";
-import { ChevronsUpDown, LayersPlus } from "lucide-react";
+import { ChevronsUpDown } from "lucide-react";
 
 function Dashboard() {
   const { data: invoices, isPending, isError } = useInvoices();
@@ -32,10 +32,7 @@ function Dashboard() {
               <span className="hidden sm:inline">total</span> invoices
             </Badge>
 
-            <CTAButton
-              label="New Invoice"
-              icon={<LayersPlus className="size-5" />}
-            />
+            <FormDrawer type="Insert" />
           </div>
 
           <div className="pb-8">
