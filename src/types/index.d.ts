@@ -24,7 +24,9 @@ declare global {
   };
 
   type FormDrawerProps = {
+    id?: string;
     type: "Insert" | "Edit";
+    invoice?: InvoiceWithItems;
   };
 
   type AddItemProps = {

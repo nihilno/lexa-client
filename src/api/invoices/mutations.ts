@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 async function markAsPaid(id: string) {
   const response = await fetch(
-    `${import.meta.env.VITE_BACKEND_URL}/invoices/${id}`,
+    `${import.meta.env.VITE_BACKEND_URL}/invoices/${id}/pay`,
     {
       method: "PATCH",
     },
@@ -50,6 +50,26 @@ async function createInvoice(formData: FormSchemaType) {
   return data.invoice;
 }
 
+async function editInvoice(formData: FormSchemaType, id: string) {
+  const response = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}/invoices/${id}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to edit invoice");
+  }
+
+  const data: { invoice: InvoiceWithItems } = await response.json();
+  return data.invoice;
+}
+
 // Hooks
 export function useMarkInvoiceAsPaid() {
   const queryClient = useQueryClient();
@@ -61,10 +81,11 @@ export function useMarkInvoiceAsPaid() {
       queryClient.invalidateQueries({
         queryKey: ["invoice", updatedInvoice.id],
       });
+
       queryClient.invalidateQueries({ queryKey: ["invoices"] });
     },
-    onError: () => {
-      toast.error("Failed to mark invoice as paid. Try again later");
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 }
@@ -83,8 +104,8 @@ export function useDeleteInvoice() {
       });
       navigate("/", { replace: true });
     },
-    onError: () => {
-      toast.error("Failed to delete this invoice. Try again later.");
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 }
@@ -95,15 +116,41 @@ export function useCreateInvoice() {
 
   return useMutation({
     mutationFn: createInvoice,
-    onSuccess: (updatedInvoice) => {
+    onSuccess: (createdInvoice) => {
       toast.success(
-        `Invoice for ${updatedInvoice.projectDescription} was created successfully.`,
+        `Invoice: ${createdInvoice.projectDescription} was created successfully.`,
       );
       navigate("/", {
         replace: true,
       });
       queryClient.invalidateQueries({
         queryKey: ["invoices"],
+      });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+}
+
+export function useEditInvoice(id: string) {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  return useMutation({
+    mutationFn: (formData: FormSchemaType) => editInvoice(formData, id),
+    onSuccess: (updatedInvoice) => {
+      queryClient.invalidateQueries({
+        queryKey: ["invoices"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["invoice", updatedInvoice.id],
+      });
+      toast.success(
+        `Invoice: ${updatedInvoice.projectDescription} was updated successfully.`,
+      );
+      navigate("/", {
+        replace: true,
       });
     },
     onError: (error) => {

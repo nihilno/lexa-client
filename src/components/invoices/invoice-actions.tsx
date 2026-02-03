@@ -1,3 +1,4 @@
+import { useSingleInvoice } from "@/api/invoices/queries";
 import DialogButton from "@/components/buttons/dialog-button";
 import { FormDrawer } from "@/components/form/form-drawer";
 import { Trash2 } from "lucide-react";
@@ -10,6 +11,8 @@ function InvoiceActions({
   id: string;
   status: Invoice["status"];
 }) {
+  const { data: invoice } = useSingleInvoice(id);
+
   return (
     <div className="bg-card/75 flex w-full flex-col items-center justify-between rounded-xl border border-dashed p-2 sm:flex-row md:flex-row">
       <div className="pb-2 sm:pb-0">
@@ -23,7 +26,7 @@ function InvoiceActions({
             subtitle="This action will mark this payment status as paid"
           />
         )}
-        <FormDrawer type="Edit" />
+        <FormDrawer type="Edit" invoice={invoice} id={id} />
 
         <DialogButton
           id={id}

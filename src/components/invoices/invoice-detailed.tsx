@@ -14,7 +14,6 @@ function InvoiceDetailed({ invoice }: { invoice: InvoiceWithItems }) {
   const {
     id: invoiceId,
     projectDescription,
-    createdAt,
     paymentDue,
     toName,
     toEmail,
@@ -28,6 +27,7 @@ function InvoiceDetailed({ invoice }: { invoice: InvoiceWithItems }) {
     fromCountry,
     items,
     totalPayment,
+    issueDate,
   } = invoice;
 
   return (
@@ -53,7 +53,7 @@ function InvoiceDetailed({ invoice }: { invoice: InvoiceWithItems }) {
               <Label className="text-muted-foreground text-sm">
                 Invoice Date
               </Label>
-              <p className="font-medium">{format(createdAt, "dd MMM yyyy")}</p>
+              <p className="font-medium">{format(issueDate, "dd MMM yyyy")}</p>
             </div>
             <div>
               <Label className="text-muted-foreground text-sm">

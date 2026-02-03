@@ -1,4 +1,9 @@
-import { FormControl, FormField, FormItem } from "@/components/ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Trash } from "lucide-react";
 
@@ -23,16 +28,13 @@ function AddItem({ form, index, remove, fields }: AddItemProps) {
           <FormItem>
             <FormControl>
               <Input
-                type="number"
                 min={1}
                 max={99}
                 value={field.value}
-                onChange={(e) => {
-                  const val = e.target.value.slice(0, 2);
-                  field.onChange(Number(val));
-                }}
+                onChange={(e) => field.onChange(Number(e.target.value))}
               />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -43,15 +45,26 @@ function AddItem({ form, index, remove, fields }: AddItemProps) {
           <FormItem>
             <FormControl>
               <Input
-                min={1}
                 type="number"
-                value={field.value}
+                step="any"
+                min={1}
+                value={field.value ?? ""}
                 onChange={(e) => {
-                  const val = e.target.value.slice(0, 6);
-                  field.onChange(Number(val));
+                  const value = e.target.value;
+
+                  if (value === "") {
+                    field.onChange(undefined);
+                    return;
+                  }
+
+                  const parsed = parseFloat(value);
+                  if (!isNaN(parsed)) {
+                    field.onChange(parsed);
+                  }
                 }}
               />
             </FormControl>
+            <FormMessage />
           </FormItem>
         )}
       />

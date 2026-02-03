@@ -53,8 +53,11 @@ const FormSchema = z.object({
         quantity: z
           .number()
           .min(1, "Quantity must be at least 1.")
-          .max(99, "Quantity must be at most 99."),
-        price: z.number().min(1, "Price must be at least 1.").max(999999),
+          .max(2, "Quantity must be at most 99."),
+        price: z
+          .number()
+          .min(1, "Price must be at least 1.")
+          .max(9999, "Price is too high."),
       }),
     )
     .min(1, "At least one item is required."),
