@@ -37,10 +37,10 @@ export function Header() {
               {link.label}
             </a>
           ))}
-          <Button variant="outline">
+          <Button variant="outline" asChild>
             <Link to="/login">Sign In</Link>
           </Button>
-          <Button>
+          <Button asChild>
             <Link to="/register">Get Started</Link>
           </Button>
         </div>

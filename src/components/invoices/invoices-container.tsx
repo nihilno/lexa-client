@@ -4,19 +4,17 @@ import InvoiceFilters from "./invoice-filters";
 
 function InvoicesContainer({ invoices }: { invoices: Invoice[] }) {
   return (
-    <>
-      <section>
-        <ScrollArea className="h-120">
-          <div className="space-y-4">
-            {invoices.map((invoice) => (
-              <InvoiceCard key={invoice.id} invoice={invoice} />
-            ))}
-          </div>
-        </ScrollArea>
+    <section>
+      <ScrollArea className="h-120">
+        <div className="space-y-4">
+          {invoices.map((invoice) => (
+            <InvoiceCard key={invoice.id} invoice={invoice} />
+          ))}
+        </div>
+      </ScrollArea>
 
-        <InvoiceFilters />
-      </section>
-    </>
+      <InvoiceFilters />
+    </section>
   );
 }
 

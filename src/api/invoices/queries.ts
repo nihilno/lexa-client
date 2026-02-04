@@ -1,11 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import { handleResponseError } from "./utils";
 
 async function getInvoices() {
   const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/invoices`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch invoices");
-  }
-  const invoices: Invoice[] = await response.json();
+  const invoices: Invoice[] = await handleResponseError(response);
   return invoices;
 }
 
@@ -13,10 +11,8 @@ async function getInvoiceById(id: string) {
   const response = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}/invoices/${id}`,
   );
-  if (!response.ok) {
-    throw new Error("Failed to fetch invoice by ID");
-  }
-  const invoice: InvoiceWithItems = await response.json();
+
+  const invoice: InvoiceWithItems = await handleResponseError(response);
   return invoice;
 }
 

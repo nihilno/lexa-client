@@ -39,8 +39,11 @@ function Dashboard() {
             <InvoicesContainer invoices={invoices} />
           </div>
         </div>
-
-        <ChevronsUpDown className="-mt-16 animate-pulse place-self-center" />
+        <ChevronsUpDown
+          className="-mt-16 animate-pulse place-self-center"
+          aria-hidden="true"
+          focusable="false"
+        />
       </section>
     </div>
   );

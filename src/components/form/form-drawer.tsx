@@ -12,8 +12,8 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Form } from "@/components/ui/form";
-import { PAYMENT_TERMS } from "@/constants";
 import { FormSchema, type FormSchemaType } from "@/lib/schema";
+import { getDefaultValues } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle, Edit2, Eraser, FilePlus, XCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -21,48 +21,7 @@ import { toast } from "sonner";
 
 export function FormDrawer({ type, invoice, id }: FormDrawerProps) {
   const isInsert = type === "Insert";
-
-  const defaultValues: FormSchemaType = isInsert
-    ? {
-        fromStreet: "",
-        fromCity: "",
-        fromPostCode: "",
-        fromCountry: "",
-        toName: "",
-        toEmail: "",
-        toStreet: "",
-        toCity: "",
-        toPostCode: "",
-        toCountry: "",
-        paymentTerms: "Net 1",
-        projectDescription: "",
-        issueDate: new Date(),
-        items: [{ name: "", quantity: 1, price: 0 }],
-      }
-    : {
-        fromStreet: invoice?.fromStreet ?? "",
-        fromCity: invoice?.fromCity ?? "",
-        fromPostCode: invoice?.fromPostCode ?? "",
-        fromCountry: invoice?.fromCountry ?? "",
-        toName: invoice?.toName ?? "",
-        toEmail: invoice?.toEmail ?? "",
-        toStreet: invoice?.toStreet ?? "",
-        toCity: invoice?.toCity ?? "",
-        toPostCode: invoice?.toPostCode ?? "",
-        toCountry: invoice?.toCountry ?? "",
-        projectDescription: invoice?.projectDescription ?? "",
-        issueDate: invoice?.issueDate
-          ? new Date(invoice.issueDate)
-          : new Date(),
-        paymentTerms: PAYMENT_TERMS.includes(invoice?.paymentTerms as any)
-          ? (invoice!.paymentTerms as FormSchemaType["paymentTerms"])
-          : "Net 1",
-        items: invoice?.items?.map((i) => ({
-          name: i.name,
-          quantity: i.quantity,
-          price: i.price,
-        })) ?? [{ name: "", quantity: 1, price: 0 }],
-      };
+  const defaultValues = getDefaultValues(type, invoice);
 
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
@@ -75,7 +34,9 @@ export function FormDrawer({ type, invoice, id }: FormDrawerProps) {
 
   function onSubmit(formData: FormSchemaType) {
     if (isCreating || isEditing) {
-      toast.loading("Please wait for the current operation to finish.");
+      toast.loading("Please wait for the current operation to finish.", {
+        id: "invoice-action-in-progress",
+      });
       return;
     }
 
@@ -85,7 +46,7 @@ export function FormDrawer({ type, invoice, id }: FormDrawerProps) {
 
   return (
     <Drawer direction={isInsert ? "left" : "right"} handleOnly={true}>
-      <DrawerTrigger asChild>
+      <DrawerTrigger asChild disabled={isCreating || isEditing}>
         <Button
           type="button"
           size="lg"
@@ -121,12 +82,10 @@ export function FormDrawer({ type, invoice, id }: FormDrawerProps) {
             <FormUpsert form={form} />
 
             <DrawerFooter className="bg-angled-lines mt-4 border-t pt-4">
-              <DrawerClose asChild>
-                <Button type="submit" disabled={isCreating || isEditing}>
-                  <CheckCircle />
-                  Submit
-                </Button>
-              </DrawerClose>
+              <Button type="submit" disabled={isCreating || isEditing}>
+                <CheckCircle />
+                Submit
+              </Button>
               <Button
                 type="button"
                 variant="outline"

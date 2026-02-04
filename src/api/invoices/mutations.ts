@@ -2,6 +2,7 @@ import type { FormSchemaType } from "@/lib/schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
+import { handleResponseError } from "./utils";
 
 async function markAsPaid(id: string) {
   const response = await fetch(
@@ -11,12 +12,8 @@ async function markAsPaid(id: string) {
     },
   );
 
-  if (!response.ok) {
-    throw new Error("Failed to mark invoice as paid");
-  }
-
-  const data: { invoice: Invoice } = await response.json();
-  return data.invoice;
+  const { invoice }: { invoice: Invoice } = await handleResponseError(response);
+  return invoice;
 }
 
 async function deleteInvoice(id: string) {
@@ -25,12 +22,8 @@ async function deleteInvoice(id: string) {
     { method: "DELETE" },
   );
 
-  if (!response.ok) {
-    throw new Error("Failed to delete invoice");
-  }
-
-  const data: { invoice: Invoice } = await response.json();
-  return data.invoice;
+  const { invoice }: { invoice: Invoice } = await handleResponseError(response);
+  return invoice;
 }
 
 async function createInvoice(formData: FormSchemaType) {
@@ -42,12 +35,9 @@ async function createInvoice(formData: FormSchemaType) {
     body: JSON.stringify(formData),
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to create new invoice");
-  }
-
-  const data: { invoice: InvoiceWithItems } = await response.json();
-  return data.invoice;
+  const { invoice }: { invoice: InvoiceWithItems } =
+    await handleResponseError(response);
+  return invoice;
 }
 
 async function editInvoice(formData: FormSchemaType, id: string) {
@@ -62,12 +52,9 @@ async function editInvoice(formData: FormSchemaType, id: string) {
     },
   );
 
-  if (!response.ok) {
-    throw new Error("Failed to edit invoice");
-  }
-
-  const data: { invoice: InvoiceWithItems } = await response.json();
-  return data.invoice;
+  const { invoice }: { invoice: InvoiceWithItems } =
+    await handleResponseError(response);
+  return invoice;
 }
 
 // Hooks
@@ -75,14 +62,17 @@ export function useMarkInvoiceAsPaid() {
   const queryClient = useQueryClient();
 
   return useMutation({
+    mutationKey: ["mark-as-paid"],
     mutationFn: markAsPaid,
     onSuccess: (updatedInvoice) => {
-      toast.success("Invoice was marked as paid successfully");
-      queryClient.invalidateQueries({
-        queryKey: ["invoice", updatedInvoice.id],
-      });
+      queryClient.setQueryData(["invoice", updatedInvoice.id], updatedInvoice);
+      queryClient.setQueryData(["invoices"], (old: Invoice[]) =>
+        old.map((invoice) =>
+          invoice.id === updatedInvoice.id ? updatedInvoice : invoice,
+        ),
+      );
 
-      queryClient.invalidateQueries({ queryKey: ["invoices"] });
+      toast.success("Invoice was marked as paid successfully");
     },
     onError: (error) => {
       toast.error(error.message);
@@ -95,13 +85,15 @@ export function useDeleteInvoice() {
   const navigate = useNavigate();
 
   return useMutation({
+    mutationKey: ["delete-invoice"],
     mutationFn: deleteInvoice,
     onSuccess: (deletedInvoice) => {
+      queryClient.removeQueries({ queryKey: ["invoice", deletedInvoice.id] });
+      queryClient.setQueryData(["invoices"], (old: Invoice[]) =>
+        old.filter((invoice) => invoice.id !== deletedInvoice.id),
+      );
+
       toast.success("Invoice was successfully deleted.");
-      queryClient.invalidateQueries({ queryKey: ["invoices"] });
-      queryClient.invalidateQueries({
-        queryKey: ["invoice", deletedInvoice.id],
-      });
       navigate("/invoices", { replace: true });
     },
     onError: (error) => {
@@ -115,6 +107,7 @@ export function useCreateInvoice() {
   const navigate = useNavigate();
 
   return useMutation({
+    mutationKey: ["create-invoice"],
     mutationFn: createInvoice,
     onSuccess: (createdInvoice) => {
       toast.success(
@@ -137,14 +130,16 @@ export function useEditInvoice(id: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
+    mutationKey: ["edit-invoice"],
     mutationFn: (formData: FormSchemaType) => editInvoice(formData, id),
     onSuccess: (updatedInvoice) => {
-      queryClient.invalidateQueries({
-        queryKey: ["invoices"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["invoice", updatedInvoice.id],
-      });
+      queryClient.setQueryData(["invoice", updatedInvoice.id], updatedInvoice);
+      queryClient.setQueryData(["invoices"], (old: InvoiceWithItems[]) =>
+        old.map((invoice) =>
+          invoice.id === updatedInvoice.id ? updatedInvoice : invoice,
+        ),
+      );
+
       toast.success(
         `Invoice: ${updatedInvoice.projectDescription} was updated successfully.`,
       );

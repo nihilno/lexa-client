@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CARD_STYLE } from "@/constants";
 import { format } from "date-fns";
 import { Calendar, ChevronsRight } from "lucide-react";
+import React from "react";
 import { Link } from "react-router";
 import Status from "./status";
 
@@ -36,4 +37,4 @@ function InvoiceCard({ invoice }: { invoice: Invoice }) {
   );
 }
 
-export default InvoiceCard;
+export default React.memo(InvoiceCard);

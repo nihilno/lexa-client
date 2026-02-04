@@ -1,9 +1,4 @@
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Trash } from "lucide-react";
 
@@ -33,7 +28,6 @@ function AddItem({ form, index, remove, fields }: AddItemProps) {
                 onChange={(e) => field.onChange(Number(e.target.value))}
               />
             </FormControl>
-            <FormMessage />{" "}
           </FormItem>
         )}
       />
@@ -64,7 +58,6 @@ function AddItem({ form, index, remove, fields }: AddItemProps) {
                 }}
               />
             </FormControl>
-            <FormMessage />
           </FormItem>
         )}
       />

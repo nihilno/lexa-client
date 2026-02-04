@@ -9,12 +9,15 @@ import { NotFoundPage } from "./pages/not-found";
 function App() {
   return (
     <Routes>
-      <Route index element={<HomePage />} />
       <Route path="auth" element={<AuthPage />} />
 
       <Route path="/" element={<Layout />}>
-        <Route path="invoices" element={<Dashboard />} />
-        <Route path="invoices/:id" element={<InvoiceDetails />} />
+        <Route index element={<HomePage />} />
+
+        <Route path="invoices">
+          <Route index element={<Dashboard />} />
+          <Route path=":id" element={<InvoiceDetails />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />
