@@ -13,7 +13,7 @@ export function formatPrice(amount: number): string {
 export async function handleResponseError(response: Response) {
   if (!response.ok) {
     const error = await response.json().catch(() => null);
-    throw new Error(error?.message || "Failed to fetch invoice by ID");
+    throw new Error(error?.message || "Request failed");
   }
   return response.json();
 }

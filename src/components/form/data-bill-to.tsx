@@ -34,7 +34,7 @@ function DataBillTo({
                   className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                 />
                 <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
-                  <User className="size-4" />
+                  <User className="size-4" aria-hidden="true" />
                 </div>
               </div>
             </FormControl>
@@ -57,7 +57,7 @@ function DataBillTo({
                   className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                 />
                 <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
-                  <Mail className="size-4" />
+                  <Mail className="size-4" aria-hidden="true" />
                 </div>
               </div>
             </FormControl>
@@ -80,7 +80,7 @@ function DataBillTo({
                   className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                 />
                 <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
-                  <MapPin className="size-4" />
+                  <MapPin className="size-4" aria-hidden="true" />
                 </div>
               </div>
             </FormControl>
@@ -104,7 +104,7 @@ function DataBillTo({
                     className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                   />
                   <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
-                    <Building2 className="size-4" />
+                    <Building2 className="size-4" aria-hidden="true" />
                   </div>
                 </div>
               </FormControl>
@@ -127,7 +127,7 @@ function DataBillTo({
                     className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                   />
                   <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
-                    <Hash className="size-4" />
+                    <Hash className="size-4" aria-hidden="true" />
                   </div>
                 </div>
               </FormControl>
@@ -150,7 +150,7 @@ function DataBillTo({
                     className="hover:border-foreground/25 pl-10 text-xs transition sm:text-sm!"
                   />
                   <div className="bg-foreground/10 absolute top-1/2 left-0 grid h-full w-8 -translate-y-1/2 place-items-center">
-                    <Globe className="size-4" />
+                    <Globe className="size-4" aria-hidden="true" />
                   </div>
                 </div>
               </FormControl>

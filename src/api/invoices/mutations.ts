@@ -66,13 +66,12 @@ export function useMarkInvoiceAsPaid() {
     mutationFn: markAsPaid,
     onSuccess: (updatedInvoice) => {
       queryClient.setQueryData(["invoice", updatedInvoice.id], updatedInvoice);
-      queryClient.setQueryData(["invoices"], (old: Invoice[]) =>
-        old.map((invoice) =>
+      queryClient.setQueryData(["invoices"], (old: Invoice[] | undefined) =>
+        old?.map((invoice) =>
           invoice.id === updatedInvoice.id ? updatedInvoice : invoice,
         ),
       );
-
-      toast.success("Invoice was marked as paid successfully");
+      toast.success("Invoice was marked as paid successfully.");
     },
     onError: (error) => {
       toast.error(error.message);
@@ -110,14 +109,14 @@ export function useCreateInvoice() {
     mutationKey: ["create-invoice"],
     mutationFn: createInvoice,
     onSuccess: (createdInvoice) => {
+      queryClient.invalidateQueries({
+        queryKey: ["invoices"],
+      });
       toast.success(
         `Invoice: ${createdInvoice.projectDescription} was created successfully.`,
       );
       navigate("/invoices", {
         replace: true,
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["invoices"],
       });
     },
     onError: (error) => {
@@ -134,10 +133,12 @@ export function useEditInvoice(id: string) {
     mutationFn: (formData: FormSchemaType) => editInvoice(formData, id),
     onSuccess: (updatedInvoice) => {
       queryClient.setQueryData(["invoice", updatedInvoice.id], updatedInvoice);
-      queryClient.setQueryData(["invoices"], (old: InvoiceWithItems[]) =>
-        old.map((invoice) =>
-          invoice.id === updatedInvoice.id ? updatedInvoice : invoice,
-        ),
+      queryClient.setQueryData(
+        ["invoices"],
+        (old: InvoiceWithItems[] | undefined) =>
+          old?.map((invoice) =>
+            invoice.id === updatedInvoice.id ? updatedInvoice : invoice,
+          ),
       );
 
       toast.success(

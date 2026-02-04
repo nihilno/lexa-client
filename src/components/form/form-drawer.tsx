@@ -16,12 +16,14 @@ import { FormSchema, type FormSchemaType } from "@/lib/schema";
 import { getDefaultValues } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle, Edit2, Eraser, FilePlus, XCircle } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 export function FormDrawer({ type, invoice, id }: FormDrawerProps) {
   const isInsert = type === "Insert";
   const defaultValues = getDefaultValues(type, invoice);
+  const [isOpen, setIsOpen] = useState(false);
 
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
@@ -40,12 +42,25 @@ export function FormDrawer({ type, invoice, id }: FormDrawerProps) {
       return;
     }
 
-    if (type === "Insert") createInvoice(formData);
-    if (type === "Edit" && invoice?.id) editInvoice(formData);
+    if (type === "Insert") {
+      createInvoice(formData);
+      setIsOpen(false);
+      return;
+    }
+    if (type === "Edit" && invoice?.id) {
+      editInvoice(formData);
+      setIsOpen(false);
+      return;
+    }
   }
 
   return (
-    <Drawer direction={isInsert ? "left" : "right"} handleOnly={true}>
+    <Drawer
+      direction={isInsert ? "left" : "right"}
+      handleOnly={true}
+      open={isOpen}
+      onOpenChange={setIsOpen}
+    >
       <DrawerTrigger asChild disabled={isCreating || isEditing}>
         <Button
           type="button"

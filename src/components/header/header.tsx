@@ -6,7 +6,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { NAVLINKS } from "@/constants";
 import { useScroll } from "@/hooks/use-scroll";
 import { cn } from "@/lib/utils";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 
 export function Header() {
   const scrolled = useScroll(10);
@@ -29,19 +29,17 @@ export function Header() {
 
         <div className="hidden items-center gap-2 md:flex">
           {NAVLINKS.map((link, i) => (
-            <a
+            <NavLink
               className={buttonVariants({ variant: "ghost" })}
-              href={link.href}
+              to={link.href}
               key={i}
             >
               {link.label}
-            </a>
+            </NavLink>
           ))}
-          <Button variant="outline" asChild>
-            <Link to="/login">Sign In</Link>
-          </Button>
+
           <Button asChild>
-            <Link to="/register">Get Started</Link>
+            <Link to="/auth">Get Started</Link>
           </Button>
         </div>
         <MobileNav />
