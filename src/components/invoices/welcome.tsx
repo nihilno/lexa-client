@@ -21,7 +21,7 @@ function Welcome() {
         <section className="relative z-10 flex flex-col items-center justify-center">
           <article className="space-y-6 text-center text-3xl font-extralight sm:text-4xl">
             <h1 className="text-4xl sm:text-5xl">
-              Welcome, {session?.user?.name}.
+              Welcome {session?.user?.name ? `, ${session.user.name}` : ""}.
             </h1>
             <h2>
               Experience Luxa, <br /> by creating your first Invoice.

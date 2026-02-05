@@ -12,9 +12,9 @@ export function RegisterForm() {
   const form = useForm<RegisterSchemaType>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
-      name: "Maciej",
-      email: "maciej.polowy1@gmail.com",
-      password: "test123123",
+      name: "",
+      email: "",
+      password: "",
     },
   });
 
@@ -62,8 +62,8 @@ export function LoginForm() {
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      email: "maciej.polowy1@gmail.com",
-      password: "test123123",
+      email: "",
+      password: "",
       rememberMe: true,
     },
   });
