@@ -1,30 +1,48 @@
 import { Form } from "@/components/ui/form";
 import { authClient } from "@/lib/auth";
-import { AuthSchema, type AuthSchemaType } from "@/lib/schema";
+import type { LoginSchemaType, RegisterSchemaType } from "@/lib/schema";
+import { LoginSchema, RegisterSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import DataCredentials from "./data-credentials";
 
-function AuthForm() {
-  const form = useForm<AuthSchemaType>({
-    resolver: zodResolver(AuthSchema),
+export function RegisterForm() {
+  const form = useForm<RegisterSchemaType>({
+    resolver: zodResolver(RegisterSchema),
     defaultValues: {
       name: "Maciej",
-      email: "maciej@example.com",
-      password: "siema123",
-      rememberMe: false,
+      email: "maciej.polowy1@gmail.com",
+      password: "test123123",
     },
   });
 
-  async function handleSubmit(formData: AuthSchemaType) {
-    console.log(formData);
-    const { error } = await authClient.signUp.email({
-      email: formData.email ?? "maciej.polowy1@gmail.com",
-      password: formData.password ?? "MyP@ssw0rd!",
-      name: formData.name ?? "Maciej Polowy",
-    });
-    toast.success(error?.message);
+  const navigate = useNavigate();
+
+  async function handleSubmit(formData: RegisterSchemaType) {
+    try {
+      const { error, data } = await authClient.signUp.email({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+      if (error) {
+        toast.error(error.message || "Something went wrong during sign up.");
+        return;
+      }
+
+      toast.success(
+        `Hello ${data.user.name || "there"}, your account has been created!`,
+        {
+          duration: 7000,
+        },
+      );
+      navigate("/invoices");
+    } catch (error) {
+      console.error("Sign up error:", error);
+      toast.error("An unexpected error occurred during sign up.");
+    }
   }
 
   return (
@@ -41,4 +59,50 @@ function AuthForm() {
   );
 }
 
-export default AuthForm;
+export function LoginForm() {
+  const form = useForm<LoginSchemaType>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: "maciej.polowy1@gmail.com",
+      password: "test123123",
+      rememberMe: true,
+    },
+  });
+
+  const navigate = useNavigate();
+
+  async function handleSubmit(formData: LoginSchemaType) {
+    try {
+      const { error, data } = await authClient.signIn.email({
+        email: formData.email,
+        password: formData.password,
+        rememberMe: formData.rememberMe,
+      });
+      if (error) {
+        toast.error(error.message || "Something went wrong during sign up.");
+        return;
+      }
+
+      toast.success(`Hello ${data.user.name || "there"}. Welcome back!`, {
+        duration: 7000,
+      });
+      navigate("/invoices");
+    } catch (error) {
+      console.error("Sign up error:", error);
+      toast.error("An unexpected error occurred during sign up.");
+    }
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-2">
+        <p className="text-muted-foreground text-start text-xs">
+          To create an account, please provide your name as you would like it to
+          appear on your profile.
+        </p>
+
+        <DataCredentials form={form} isLogin={true} />
+      </form>
+    </Form>
+  );
+}

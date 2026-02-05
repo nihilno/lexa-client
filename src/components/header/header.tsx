@@ -1,12 +1,12 @@
-"use client";
 import Logo from "@/components/global/logo";
 import { ModeToggle } from "@/components/global/theme-toggle";
 import { MobileNav } from "@/components/header/mobile-nav";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { NAVLINKS } from "@/constants";
 import { useScroll } from "@/hooks/use-scroll";
 import { cn } from "@/lib/utils";
-import { Link, NavLink } from "react-router";
+import { NavLink } from "react-router";
+import AuthButtons from "../auth/auth-buttons";
 
 export function Header() {
   const scrolled = useScroll(10);
@@ -38,9 +38,7 @@ export function Header() {
             </NavLink>
           ))}
 
-          <Button asChild>
-            <Link to="/auth">Get Started</Link>
-          </Button>
+          <AuthButtons />
         </div>
         <MobileNav />
       </nav>

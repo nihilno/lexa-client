@@ -1,13 +1,16 @@
-import AuthForm from "@/components/auth/auth-form";
+import { LoginForm, RegisterForm } from "@/components/auth/auth-form";
 import AuthProviders from "@/components/auth/auth-providers";
 import { FloatingPaths } from "@/components/auth/floating-paths";
 import Logo from "@/components/global/logo";
 import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon } from "lucide-react";
+import { useState } from "react";
 import { NavLink } from "react-router";
 import { ModeToggle } from "../components/global/theme-toggle";
 
 export function AuthPage() {
+  const [isLogin, setIsLogin] = useState(false);
+
   return (
     <main className="relative md:h-screen md:overflow-hidden lg:grid lg:grid-cols-2">
       <div className="bg-secondary dark:bg-secondary/20 relative hidden h-full flex-col border-r p-10 lg:flex">
@@ -59,7 +62,24 @@ export function AuthPage() {
             <div className="bg-border h-px w-full" />
           </div>
 
-          <AuthForm />
+          {isLogin ? <LoginForm /> : <RegisterForm />}
+
+          <div className="grid grid-cols-2 gap-2">
+            <Button
+              className="w-full"
+              variant={"secondary"}
+              onClick={() => setIsLogin(true)}
+            >
+              Sign In
+            </Button>
+            <Button
+              className="w-full"
+              variant={"secondary"}
+              onClick={() => setIsLogin(false)}
+            >
+              Sign Up
+            </Button>
+          </div>
 
           <p className="text-muted-foreground mt-8 text-sm">
             By clicking continue, you agree to our{" "}

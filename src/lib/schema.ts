@@ -63,14 +63,33 @@ const FormSchema = z.object({
     .min(1, "At least one item is required."),
 });
 
-const AuthSchema = z.object({
-  name: z.string().min(1, "Name is required."),
+const RegisterSchema = z.object({
+  name: z.string().min(1, "Name is required.").max(128),
   email: z.email("Invalid email address."),
-  password: z.string().min(6, "Password must be at least 6 characters long."),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters long.")
+    .max(128),
+});
+
+const LoginSchema = z.object({
+  email: z.email("Invalid email address."),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters long.")
+    .max(128),
   rememberMe: z.boolean().optional(),
 });
 
 type FormSchemaType = z.infer<typeof FormSchema>;
-type AuthSchemaType = z.infer<typeof AuthSchema>;
+type RegisterSchemaType = z.infer<typeof RegisterSchema>;
+type LoginSchemaType = z.infer<typeof LoginSchema>;
 
-export { AuthSchema, FormSchema, type AuthSchemaType, type FormSchemaType };
+export {
+  FormSchema,
+  LoginSchema,
+  RegisterSchema,
+  type FormSchemaType,
+  type LoginSchemaType,
+  type RegisterSchemaType,
+};
