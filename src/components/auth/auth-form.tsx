@@ -38,6 +38,8 @@ export function RegisterForm() {
           duration: 7000,
         },
       );
+
+      await authClient.getSession();
       navigate("/invoices", { replace: true });
     } catch (error) {
       console.error("Sign up error:", error);
@@ -82,6 +84,7 @@ export function LoginForm() {
         return;
       }
 
+      await authClient.getSession();
       navigate("/invoices", { replace: true });
     } catch (error) {
       console.error("Sign in error:", error);

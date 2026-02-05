@@ -5,7 +5,6 @@ import Logo from "@/components/global/logo";
 import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon } from "lucide-react";
 import { useState } from "react";
-import { NavLink } from "react-router";
 import { ModeToggle } from "../components/global/theme-toggle";
 
 export function AuthPage() {
@@ -34,11 +33,9 @@ export function AuthPage() {
         </div>
       </div>
       <div className="bg-[radial-gradient(70%_70%_at_30%_0%,--theme(--color-foreground/.15),transparent)] relative flex min-h-screen flex-col justify-center p-4">
-        <Button asChild className="absolute top-7 left-5" variant="ghost">
-          <NavLink to="/">
-            <ChevronLeftIcon />
-            Home
-          </NavLink>
+        <Button className="absolute top-7 left-5" variant="ghost">
+          <ChevronLeftIcon />
+          Home
         </Button>
         <div className="mx-auto space-y-4 sm:w-sm">
           <div className="flex items-center gap-2">

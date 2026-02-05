@@ -1,3 +1,4 @@
+import useUserId from "@/hooks/use-user-id";
 import type { FormSchemaType } from "@/lib/schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
@@ -63,16 +64,22 @@ async function editInvoice(formData: FormSchemaType, id: string) {
 // Hooks
 export function useMarkInvoiceAsPaid() {
   const queryClient = useQueryClient();
+  const userId = useUserId();
 
   return useMutation({
     mutationKey: ["mark-as-paid"],
     mutationFn: markAsPaid,
     onSuccess: (updatedInvoice) => {
-      queryClient.setQueryData(["invoice", updatedInvoice.id], updatedInvoice);
-      queryClient.setQueryData(["invoices"], (old: Invoice[] | undefined) =>
-        old?.map((invoice) =>
-          invoice.id === updatedInvoice.id ? updatedInvoice : invoice,
-        ),
+      queryClient.setQueryData(
+        ["invoice", updatedInvoice.id, userId],
+        updatedInvoice,
+      );
+      queryClient.setQueryData(
+        ["invoices", userId],
+        (old: Invoice[] | undefined) =>
+          old?.map((invoice) =>
+            invoice.id === updatedInvoice.id ? updatedInvoice : invoice,
+          ),
       );
       toast.success("Invoice was marked as paid successfully.");
     },
@@ -84,14 +91,17 @@ export function useMarkInvoiceAsPaid() {
 
 export function useDeleteInvoice() {
   const queryClient = useQueryClient();
+  const userId = useUserId();
   const navigate = useNavigate();
 
   return useMutation({
     mutationKey: ["delete-invoice"],
     mutationFn: deleteInvoice,
     onSuccess: (deletedInvoice) => {
-      queryClient.removeQueries({ queryKey: ["invoice", deletedInvoice.id] });
-      queryClient.setQueryData(["invoices"], (old: Invoice[]) =>
+      queryClient.removeQueries({
+        queryKey: ["invoice", deletedInvoice.id, userId],
+      });
+      queryClient.setQueryData(["invoices", userId], (old: Invoice[]) =>
         old.filter((invoice) => invoice.id !== deletedInvoice.id),
       );
 
@@ -106,6 +116,7 @@ export function useDeleteInvoice() {
 
 export function useCreateInvoice() {
   const queryClient = useQueryClient();
+  const userId = useUserId();
   const navigate = useNavigate();
 
   return useMutation({
@@ -113,7 +124,7 @@ export function useCreateInvoice() {
     mutationFn: createInvoice,
     onSuccess: (createdInvoice) => {
       queryClient.invalidateQueries({
-        queryKey: ["invoices"],
+        queryKey: ["invoices", userId],
       });
       toast.success(
         `Invoice: ${createdInvoice.projectDescription} was created successfully.`,
@@ -130,14 +141,18 @@ export function useCreateInvoice() {
 
 export function useEditInvoice(id: string) {
   const queryClient = useQueryClient();
+  const userId = useUserId();
 
   return useMutation({
     mutationKey: ["edit-invoice"],
     mutationFn: (formData: FormSchemaType) => editInvoice(formData, id),
     onSuccess: (updatedInvoice) => {
-      queryClient.setQueryData(["invoice", updatedInvoice.id], updatedInvoice);
       queryClient.setQueryData(
-        ["invoices"],
+        ["invoice", updatedInvoice.id, userId],
+        updatedInvoice,
+      );
+      queryClient.setQueryData(
+        ["invoices", userId],
         (old: InvoiceWithItems[] | undefined) =>
           old?.map((invoice) =>
             invoice.id === updatedInvoice.id ? updatedInvoice : invoice,

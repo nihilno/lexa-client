@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth";
+import { useQueryClient } from "@tanstack/react-query";
 import { Loader2, LogOut } from "lucide-react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 function Logout({ isPending }: { isPending: boolean }) {
   const navigation = useNavigate();
+  const queryClient = useQueryClient();
 
   async function handleLogout() {
     try {
@@ -16,6 +18,7 @@ function Logout({ isPending }: { isPending: boolean }) {
         return;
       }
 
+      queryClient.clear();
       navigation("/auth");
     } catch (error) {
       console.error("Logout error:", error);

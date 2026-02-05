@@ -1,3 +1,4 @@
+import useUserId from "@/hooks/use-user-id";
 import { useQuery } from "@tanstack/react-query";
 import { handleResponseError } from "./utils";
 
@@ -23,16 +24,21 @@ async function getInvoiceById(id: string) {
 
 // Hooks
 export function useInvoices() {
+  const userId = useUserId();
+
   return useQuery({
-    queryKey: ["invoices"],
+    queryKey: ["invoices", userId],
     queryFn: getInvoices,
+    enabled: !!userId,
   });
 }
 
 export function useSingleInvoice(id: string) {
+  const userId = useUserId();
+
   return useQuery({
-    queryKey: ["invoice", id],
+    queryKey: ["invoice", id, userId],
     queryFn: () => getInvoiceById(id),
-    enabled: !!id,
+    enabled: !!id && !!userId,
   });
 }

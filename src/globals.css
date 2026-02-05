@@ -141,6 +141,12 @@
   video {
     @apply select-none;
   }
+
+  input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px transparent inset !important;
+    -webkit-text-fill-color: var(--color-foreground) !important;
+    transition: background-color 9999s ease-in-out 0s !important;
+  }
 }
 
 @layer utilities {
