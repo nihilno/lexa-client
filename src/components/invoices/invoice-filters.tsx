@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CheckCircle, Clock, Hourglass, Search } from "lucide-react";
+import { AlignLeft, CheckCircle, Clock, Hourglass, Search } from "lucide-react";
 
 function InvoiceFilters() {
   return (
@@ -28,6 +28,9 @@ function InvoiceFilters() {
           <SelectValue placeholder="Filter by status" />
         </SelectTrigger>
         <SelectContent>
+          <SelectItem value="all">
+            <AlignLeft className="text-foreground" /> Any
+          </SelectItem>
           <SelectItem value="paid">
             <CheckCircle className="text-foreground" /> Paid
           </SelectItem>

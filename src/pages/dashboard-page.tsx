@@ -14,22 +14,23 @@ function Dashboard() {
   const isEmpty = !invoices || invoices.length === 0;
 
   if (isPending) return <Loader />;
-  if (isEmpty) return <Welcome />;
   if (isError) return <Error />;
+  if (isEmpty) return <Welcome />;
 
   return (
     <div className="space-y-16">
       <h1 className="text-center text-3xl font-extralight sm:text-4xl">
-        Welcome back, {session?.user?.name}. <br /> Your latest invoices are
-        ready.
+        Welcome back{session?.user?.name ? `, ${session.user.name}` : ""}.{" "}
+        <br /> Your latest invoices are ready.
       </h1>
-
       <section className="md:grid md:grid-cols-[1fr_min-content] md:gap-4">
         <div>
           <div className="mb-4 flex w-full flex-col items-center gap-4 sm:flex-row sm:justify-between">
             <Badge className="text-xs sm:text-base">
-              There are {invoices.length}{" "}
-              <span className="hidden sm:inline">total</span> invoices
+              {invoices.length === 1
+                ? `There is ${invoices.length} invoice`
+                : `There are ${invoices.length} invoices`}{" "}
+              <span className="hidden sm:inline">total</span>
             </Badge>
 
             <FormDrawer type="Insert" />

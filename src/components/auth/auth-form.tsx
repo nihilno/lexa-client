@@ -4,7 +4,7 @@ import type { LoginSchemaType, RegisterSchemaType } from "@/lib/schema";
 import { LoginSchema, RegisterSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import DataCredentials from "./data-credentials";
 
@@ -19,8 +19,6 @@ export function RegisterForm() {
   });
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/invoices";
 
   async function handleSubmit(formData: RegisterSchemaType) {
     try {
@@ -40,7 +38,7 @@ export function RegisterForm() {
           duration: 7000,
         },
       );
-      navigate(from, { replace: true });
+      navigate("/invoices", { replace: true });
     } catch (error) {
       console.error("Sign up error:", error);
       toast.error("An unexpected error occurred during Sign up.");
@@ -71,8 +69,6 @@ export function LoginForm() {
   });
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/invoices";
 
   async function handleSubmit(formData: LoginSchemaType) {
     try {
@@ -86,7 +82,7 @@ export function LoginForm() {
         return;
       }
 
-      navigate(from, { replace: true });
+      navigate("/invoices", { replace: true });
     } catch (error) {
       console.error("Sign in error:", error);
       toast.error("An unexpected error occurred during sign in.");

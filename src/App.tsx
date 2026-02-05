@@ -1,20 +1,19 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import RequireAuth from "./components/auth/require-auth";
 import Layout from "./components/global/layout";
 import { AuthPage } from "./pages/auth-page";
 import Dashboard from "./pages/dashboard-page";
-import HomePage from "./pages/home-page";
 import InvoiceDetails from "./pages/invoice-details-page";
 import { NotFoundPage } from "./pages/not-found";
 
 function App() {
   return (
     <Routes>
-      <Route path="welcome" element={<HomePage />} />
       <Route path="auth" element={<AuthPage />} />
 
       <Route element={<RequireAuth />}>
         <Route path="/" element={<Layout />}>
+          <Route index element={<Navigate to="invoices" replace />} />
           <Route path="invoices">
             <Route index element={<Dashboard />} />
             <Route path=":id" element={<InvoiceDetails />} />

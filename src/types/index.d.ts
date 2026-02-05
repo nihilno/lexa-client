@@ -28,6 +28,7 @@ declare global {
     type: "Insert" | "Edit";
     invoice?: InvoiceWithItems;
     label?: string;
+    hero?: boolean;
   };
 
   type AddItemProps = {

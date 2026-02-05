@@ -12,15 +12,14 @@ function InvoiceDetails() {
   const { data: invoice, isPending, isError } = useSingleInvoice(id!);
 
   if (isPending) return <Loader />;
+  if (isError) return <Error />;
+
   if (!invoice)
     return (
       <div className="center absolute">
         <EmptyFallback />
       </div>
     );
-
-  if (isError) return <Error />;
-
   return (
     <section className="mt-24 space-y-12">
       <div className="grid grid-cols-1 items-center gap-8 sm:grid-cols-[min-content_1fr]">

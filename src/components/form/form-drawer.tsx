@@ -25,6 +25,7 @@ export function FormDrawer({
   invoice,
   id,
   label = "New Invoice",
+  hero = false,
 }: FormDrawerProps) {
   const isInsert = type === "Insert";
   const defaultValues = getDefaultValues(type, invoice);
@@ -67,19 +68,30 @@ export function FormDrawer({
       onOpenChange={setIsOpen}
     >
       <DrawerTrigger asChild disabled={isCreating || isEditing}>
-        <Button
-          type="button"
-          size="lg"
-          className="dark:bg-foreground/6 dark:text-foreground dark:hover:bg-foreground/10 focus:ring-foreground/20 bg-foreground/80 w-full rounded-full backdrop-blur-2xl focus:ring-2 sm:w-auto dark:outline"
-          aria-label={isInsert ? "New Invoice" : "Edit Invoice"}
-        >
-          {isInsert ? (
-            <PlusCircle className="size-5" />
-          ) : (
-            <Edit2 className="size-5" />
-          )}
-          {isInsert ? label : "Edit Invoice"}
-        </Button>
+        {hero ? (
+          <Button
+            type="button"
+            size="lg"
+            aria-label={isInsert ? label : "Edit Invoice"}
+            className="h-15 w-full rounded-full text-2xl transition hover:-translate-y-1"
+          >
+            Begin
+          </Button>
+        ) : (
+          <Button
+            type="button"
+            size="lg"
+            className="dark:bg-foreground/6 dark:text-foreground dark:hover:bg-foreground/10 focus:ring-foreground/20 bg-foreground/80 w-full rounded-full backdrop-blur-2xl focus:ring-2 sm:w-auto dark:outline"
+            aria-label={isInsert ? label : "Edit Invoice"}
+          >
+            {isInsert ? (
+              <PlusCircle className="size-5" />
+            ) : (
+              <Edit2 className="size-5" />
+            )}
+            {isInsert ? label : "Edit Invoice"}{" "}
+          </Button>
+        )}
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="bg-angled-lines border-b shadow">

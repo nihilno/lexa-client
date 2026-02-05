@@ -145,9 +145,14 @@ export function Footer() {
         <div className="flex max-w-4xl flex-col justify-between gap-2 py-4">
           <p className="text-muted-foreground text-center text-sm font-light">
             &copy; {new Date().getFullYear()}{" "}
-            <span className="text-foreground cursor-pointer hover:underline">
+            <a
+              className="text-foreground cursor-pointer hover:underline"
+              href="https://github.com/nihilno"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               MP
-            </span>
+            </a>
             , All rights reserved
           </p>
         </div>
