@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth";
-import { LogOut } from "lucide-react";
+import { Loader2, LogOut } from "lucide-react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
-function Logout() {
+function Logout({ isPending }: { isPending: boolean }) {
   const navigation = useNavigate();
 
   async function handleLogout() {
@@ -16,17 +16,23 @@ function Logout() {
         return;
       }
 
-      toast.success("You have been logged out.");
       navigation("/auth");
     } catch (error) {
       console.error("Logout error:", error);
+      toast.error("Something went wrong during logout.");
     }
   }
 
   return (
-    <Button onClick={handleLogout}>
-      <LogOut />
-      Logout
+    <Button onClick={handleLogout} disabled={isPending}>
+      {isPending ? (
+        <Loader2 className="size-4 animate-spin" />
+      ) : (
+        <>
+          <LogOut />
+          Logout
+        </>
+      )}
     </Button>
   );
 }

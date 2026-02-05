@@ -27,6 +27,7 @@ declare global {
     id?: string;
     type: "Insert" | "Edit";
     invoice?: InvoiceWithItems;
+    label?: string;
   };
 
   type AddItemProps = {

@@ -15,12 +15,17 @@ import { Form } from "@/components/ui/form";
 import { FormSchema, type FormSchemaType } from "@/lib/schema";
 import { getDefaultValues } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle, Edit2, Eraser, FilePlus, XCircle } from "lucide-react";
+import { CheckCircle, Edit2, Eraser, PlusCircle, XCircle } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-export function FormDrawer({ type, invoice, id }: FormDrawerProps) {
+export function FormDrawer({
+  type,
+  invoice,
+  id,
+  label = "New Invoice",
+}: FormDrawerProps) {
   const isInsert = type === "Insert";
   const defaultValues = getDefaultValues(type, invoice);
   const [isOpen, setIsOpen] = useState(false);
@@ -69,18 +74,18 @@ export function FormDrawer({ type, invoice, id }: FormDrawerProps) {
           aria-label={isInsert ? "New Invoice" : "Edit Invoice"}
         >
           {isInsert ? (
-            <FilePlus className="size-5" />
+            <PlusCircle className="size-5" />
           ) : (
             <Edit2 className="size-5" />
           )}
-          {isInsert ? "New Invoice" : "Edit Invoice"}
+          {isInsert ? label : "Edit Invoice"}
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="bg-angled-lines border-b shadow">
           <DrawerTitle className="flex items-center gap-2">
-            {isInsert ? <FilePlus /> : <Edit2 />}
-            {isInsert ? "New Invoice" : "Edit Invoice"}
+            {isInsert ? <PlusCircle /> : <Edit2 />}
+            {isInsert ? label : "Edit Invoice"}
           </DrawerTitle>
           <DrawerDescription>
             {isInsert

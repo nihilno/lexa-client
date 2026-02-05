@@ -23,9 +23,11 @@ function DataCredentials({
   form: ReturnType<typeof useForm<any>>;
   isLogin?: boolean;
 }) {
+  const disabled = form.formState.isSubmitting;
+
   return (
     <>
-      <div className="bg-angled-lines min-h-45 space-y-2 rounded-md">
+      <div className="bg-angled-lines min-h-50 space-y-2 rounded-md border-b">
         {!isLogin && (
           <FormField
             name="name"
@@ -39,6 +41,7 @@ function DataCredentials({
                       type="text"
                       {...field}
                       autoComplete="off"
+                      disabled={disabled}
                     />
                     <InputGroupAddon>
                       <User />
@@ -62,6 +65,7 @@ function DataCredentials({
                     type="email"
                     {...field}
                     autoComplete="off"
+                    disabled={disabled}
                   />
                   <InputGroupAddon>
                     <AtSign />
@@ -84,6 +88,7 @@ function DataCredentials({
                     type="password"
                     {...field}
                     autoComplete="off"
+                    disabled={disabled}
                   />
                   <InputGroupAddon>
                     <Key />
@@ -107,6 +112,7 @@ function DataCredentials({
                         checked={field.value}
                         onCheckedChange={field.onChange}
                         className="transition"
+                        disabled={disabled}
                       />
                     </FormControl>
                     <FieldContent>
@@ -122,13 +128,9 @@ function DataCredentials({
           />
         )}
       </div>
-      <Button
-        className="w-full"
-        type="submit"
-        disabled={form.formState.isSubmitting}
-      >
-        {form.formState.isSubmitting ? (
-          <Loader2 className="animate-spin" />
+      <Button className="w-full" type="submit" disabled={disabled}>
+        {disabled ? (
+          <Loader2 className="size-4 animate-spin" />
         ) : (
           <>
             Proceed

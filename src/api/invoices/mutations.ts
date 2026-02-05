@@ -9,6 +9,7 @@ async function markAsPaid(id: string) {
     `${import.meta.env.VITE_BACKEND_URL}/invoices/${id}/pay`,
     {
       method: "PATCH",
+      credentials: "include",
     },
   );
 
@@ -19,7 +20,7 @@ async function markAsPaid(id: string) {
 async function deleteInvoice(id: string) {
   const response = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}/invoices/${id}`,
-    { method: "DELETE" },
+    { method: "DELETE", credentials: "include" },
   );
 
   const { invoice }: { invoice: Invoice } = await handleResponseError(response);
@@ -33,6 +34,7 @@ async function createInvoice(formData: FormSchemaType) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(formData),
+    credentials: "include",
   });
 
   const { invoice }: { invoice: InvoiceWithItems } =
@@ -49,6 +51,7 @@ async function editInvoice(formData: FormSchemaType, id: string) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
+      credentials: "include",
     },
   );
 

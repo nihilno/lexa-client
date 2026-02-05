@@ -1,6 +1,7 @@
 import { useSingleInvoice } from "@/api/invoices/queries";
 import BackButton from "@/components/buttons/back-button";
 import EmptyFallback from "@/components/global/empty-content";
+import Error from "@/components/global/error";
 import Loader from "@/components/global/loader";
 import InvoiceActions from "@/components/invoices/invoice-actions";
 import InvoiceDetailed from "@/components/invoices/invoice-detailed";
@@ -11,12 +12,14 @@ function InvoiceDetails() {
   const { data: invoice, isPending, isError } = useSingleInvoice(id!);
 
   if (isPending) return <Loader />;
-  if (isError || !invoice)
+  if (!invoice)
     return (
       <div className="center absolute">
         <EmptyFallback />
       </div>
     );
+
+  if (isError) return <Error />;
 
   return (
     <section className="mt-24 space-y-12">

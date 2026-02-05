@@ -1,27 +1,27 @@
 import { useInvoices } from "@/api/invoices/queries";
 import { FormDrawer } from "@/components/form/form-drawer";
-import EmptyFallback from "@/components/global/empty-content";
+import Error from "@/components/global/error";
 import Loader from "@/components/global/loader";
 import InvoicesContainer from "@/components/invoices/invoices-container";
+import Welcome from "@/components/invoices/welcome";
 import { Badge } from "@/components/ui/badge";
+import useSession from "@/hooks/use-session";
 import { ChevronsUpDown } from "lucide-react";
 
 function Dashboard() {
   const { data: invoices, isPending, isError } = useInvoices();
+  const { session } = useSession();
   const isEmpty = !invoices || invoices.length === 0;
 
   if (isPending) return <Loader />;
-  if (isError || isEmpty)
-    return (
-      <div className="center absolute">
-        <EmptyFallback />
-      </div>
-    );
+  if (isEmpty) return <Welcome />;
+  if (isError) return <Error />;
 
   return (
     <div className="space-y-16">
       <h1 className="text-center text-3xl font-extralight sm:text-4xl">
-        Welcome back, Maciej. <br /> Your latest invoices are ready.
+        Welcome back, {session?.user?.name}. <br /> Your latest invoices are
+        ready.
       </h1>
 
       <section className="md:grid md:grid-cols-[1fr_min-content] md:gap-4">

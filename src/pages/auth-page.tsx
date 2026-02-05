@@ -9,7 +9,7 @@ import { NavLink } from "react-router";
 import { ModeToggle } from "../components/global/theme-toggle";
 
 export function AuthPage() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
     <main className="relative md:h-screen md:overflow-hidden lg:grid lg:grid-cols-2">
@@ -67,15 +67,17 @@ export function AuthPage() {
           <div className="grid grid-cols-2 gap-2">
             <Button
               className="w-full"
-              variant={"secondary"}
+              variant={isLogin ? "secondary" : "ghost"}
               onClick={() => setIsLogin(true)}
+              aria-pressed={isLogin}
             >
               Sign In
             </Button>
             <Button
               className="w-full"
-              variant={"secondary"}
+              variant={!isLogin ? "secondary" : "ghost"}
               onClick={() => setIsLogin(false)}
+              aria-pressed={!isLogin}
             >
               Sign Up
             </Button>
