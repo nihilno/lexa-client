@@ -5,7 +5,7 @@ import InvoiceFilters from "./invoice-filters";
 function InvoicesContainer({ invoices }: { invoices: Invoice[] }) {
   return (
     <section>
-      <ScrollArea className="h-120">
+      <ScrollArea className="h-120 rounded-xl border border-dashed p-0.5">
         <div className="space-y-4">
           {invoices.map((invoice) => (
             <InvoiceCard key={invoice.id} invoice={invoice} />

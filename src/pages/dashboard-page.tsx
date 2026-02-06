@@ -41,7 +41,7 @@ function Dashboard() {
           </div>
         </div>
         <ChevronsUpDown
-          className="-mt-16 animate-pulse place-self-center"
+          className="-mt-16 hidden animate-pulse place-self-center md:block"
           aria-hidden="true"
           focusable="false"
         />

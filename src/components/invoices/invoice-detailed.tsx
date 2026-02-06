@@ -47,7 +47,7 @@ function InvoiceDetailed({ invoice }: { invoice: InvoiceWithItems }) {
         </ul>
       </CardHeader>
       <CardContent>
-        <section className="grid w-full grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-0">
+        <section className="line-clamp-1 grid w-full grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-0">
           <div className="flex flex-col justify-between gap-2">
             <div>
               <Label className="text-muted-foreground text-sm">
