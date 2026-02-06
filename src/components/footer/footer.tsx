@@ -11,77 +11,29 @@ import {
 } from "lucide-react";
 
 export function Footer() {
-  const company = [
-    {
-      title: "About Us",
-      href: "#",
-    },
-    {
-      title: "Careers",
-      href: "#",
-    },
-    {
-      title: "Brand assets",
-      href: "#",
-    },
-    {
-      title: "Privacy Policy",
-      href: "#",
-    },
-    {
-      title: "Terms of Service",
-      href: "#",
-    },
+  const companyLinks = [
+    "About Us",
+    "Careers",
+    "Brand assets",
+    "Privacy Policy",
+    "Terms of Service",
   ];
 
-  const resources = [
-    {
-      title: "Blog",
-      href: "#",
-    },
-    {
-      title: "Help Center",
-      href: "#",
-    },
-    {
-      title: "Contact Support",
-      href: "#",
-    },
-    {
-      title: "Community",
-      href: "#",
-    },
-    {
-      title: "Security",
-      href: "#",
-    },
+  const resourceLinks = [
+    "Blog",
+    "Help Center",
+    "Contact Support",
+    "Community",
+    "Security",
   ];
 
   const socialLinks = [
-    {
-      icon: FacebookIcon,
-      link: "#",
-    },
-    {
-      icon: GithubIcon,
-      link: "#",
-    },
-    {
-      icon: InstagramIcon,
-      link: "#",
-    },
-    {
-      icon: LinkedinIcon,
-      link: "#",
-    },
-    {
-      icon: TwitterIcon,
-      link: "#",
-    },
-    {
-      icon: YoutubeIcon,
-      link: "#",
-    },
+    FacebookIcon,
+    GithubIcon,
+    InstagramIcon,
+    LinkedinIcon,
+    TwitterIcon,
+    YoutubeIcon,
   ];
   return (
     <footer className="relative">
@@ -99,46 +51,43 @@ export function Footer() {
               A comprehensive financial technology platform.
             </p>
             <div className="flex gap-2">
-              {socialLinks.map((item, index) => (
-                <Button
-                  key={`social-${item.link}-${index}`}
-                  size="icon-sm"
-                  variant="outline"
-                >
-                  <a href={item.link} target="_blank">
-                    <item.icon className="size-3.5" />
-                  </a>
+              {socialLinks.map((Item, index) => (
+                <Button key={index} size="icon-sm" variant="outline">
+                  {Item === GithubIcon ? (
+                    <a
+                      href="https://github.com/nihilno"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="animate-pulse"
+                    >
+                      <Item className="size-3.5" />
+                    </a>
+                  ) : (
+                    <Item className="size-3.5" />
+                  )}
                 </Button>
               ))}
             </div>
           </div>
           <div className="col-span-3 w-full md:col-span-1">
             <span className="text-muted-foreground text-xs">Resources</span>
-            <div className="mt-2 flex flex-col gap-2">
-              {resources.map(({ href, title }) => (
-                <a
-                  className="w-max text-sm hover:underline"
-                  href={href}
-                  key={title}
-                >
+            <ul className="mt-2 flex flex-col gap-2">
+              {resourceLinks.map((title) => (
+                <li className="cursor-pointer hover:underline" key={title}>
                   {title}
-                </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
           <div className="col-span-3 w-full md:col-span-1">
             <span className="text-muted-foreground text-xs">Company</span>
-            <div className="mt-2 flex flex-col gap-2">
-              {company.map(({ href, title }) => (
-                <a
-                  className="w-max text-sm hover:underline"
-                  href={href}
-                  key={title}
-                >
+            <ul className="mt-2 flex flex-col gap-2">
+              {companyLinks.map((title) => (
+                <li className="cursor-pointer hover:underline" key={title}>
                   {title}
-                </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
         <div className="bg-border absolute inset-x-0 h-px w-full" />

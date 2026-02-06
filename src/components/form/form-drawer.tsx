@@ -24,7 +24,7 @@ export function FormDrawer({
   type,
   invoice,
   id,
-  label = "New Invoice",
+  label = "New Invoice (Demo data)",
   hero = false,
 }: FormDrawerProps) {
   const isInsert = type === "Insert";

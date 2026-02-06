@@ -101,8 +101,10 @@ export function useDeleteInvoice() {
       queryClient.removeQueries({
         queryKey: ["invoice", deletedInvoice.id, userId],
       });
-      queryClient.setQueryData(["invoices", userId], (old: Invoice[]) =>
-        old.filter((invoice) => invoice.id !== deletedInvoice.id),
+      queryClient.setQueryData(
+        ["invoices", userId],
+        (old: Invoice[] | undefined) =>
+          old?.filter((invoice) => invoice.id !== deletedInvoice.id),
       );
 
       toast.success("Invoice was successfully deleted.");

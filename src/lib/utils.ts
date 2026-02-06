@@ -13,20 +13,28 @@ export function getDefaultValues(
 ) {
   if (type === "Insert" || !invoice)
     return {
-      fromStreet: "",
-      fromCity: "",
-      fromPostCode: "",
-      fromCountry: "",
-      toName: "",
-      toEmail: "",
-      toStreet: "",
-      toCity: "",
-      toPostCode: "",
-      toCountry: "",
-      paymentTerms: "Net 1",
-      projectDescription: "",
-      issueDate: new Date(),
-      items: [{ name: "", quantity: 1, price: 0 }],
+      fromStreet: "ul. Przykładowa 12/4",
+      fromCity: "Tarnowskie Góry",
+      fromPostCode: "42-600",
+      fromCountry: "Polska",
+
+      toName: "Jan Przykładowski",
+      toEmail: "jan.przykladowski@example.com",
+      toStreet: "ul. Kwiatowa 8",
+      toCity: "Katowice",
+      toPostCode: "40-001",
+      toCountry: "Polska",
+
+      paymentTerms: "Net 14",
+      projectDescription:
+        "Projekt i wdrożenie strony internetowej dla firmy usługowej",
+      issueDate: new Date("2026-02-24"),
+
+      items: [
+        { name: "Projekt UI/UX", quantity: 1, price: 2500 },
+        { name: "Implementacja frontend", quantity: 1, price: 3500 },
+        { name: "Konfiguracja serwera", quantity: 1, price: 800 },
+      ],
     } as FormSchemaType;
 
   return {

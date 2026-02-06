@@ -3,12 +3,11 @@ export const CARD_STYLE =
 export const PAYMENT_TERMS = ["Net 1", "Net 7", "Net 14", "Net 30"] as const;
 export const NAVLINKS = [
   {
-    label: "Home",
-    href: "#",
-  },
-
-  {
     label: "Invoices",
     href: "/invoices",
+  },
+  {
+    label: "Visit 404",
+    href: "/404",
   },
 ] as const;
