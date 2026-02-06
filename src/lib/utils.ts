@@ -28,7 +28,7 @@ export function getDefaultValues(
       paymentTerms: "Net 14",
       projectDescription:
         "Projekt i wdrożenie strony internetowej dla firmy usługowej",
-      issueDate: new Date("2026-02-24"),
+      issueDate: new Date(),
 
       items: [
         { name: "Projekt UI/UX", quantity: 1, price: 2500 },

@@ -35,8 +35,8 @@ function Welcome() {
           This <span className="text-foreground">demo application</span> also
           handles loading states & errors gracefully. Same goes with empty
           states or 404 pages.{" "}
-          <span className="text-foreground">Enjoy! :)</span>.
-        </p>
+          <span className="text-foreground">Enjoy! :)</span>
+        </p>{" "}
       </div>
     </>
   );
