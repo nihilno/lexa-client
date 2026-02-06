@@ -40,7 +40,6 @@ function DataCredentials({
                       placeholder="Tell us your name."
                       type="text"
                       {...field}
-                      autoComplete="off"
                       disabled={disabled}
                     />
                     <InputGroupAddon>
@@ -64,7 +63,6 @@ function DataCredentials({
                     placeholder="example@example.com"
                     type="email"
                     {...field}
-                    autoComplete="off"
                     disabled={disabled}
                   />
                   <InputGroupAddon>
@@ -87,7 +85,6 @@ function DataCredentials({
                     placeholder="Enter your password."
                     type="password"
                     {...field}
-                    autoComplete="off"
                     disabled={disabled}
                   />
                   <InputGroupAddon>
