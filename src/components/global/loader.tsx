@@ -13,11 +13,11 @@ function Loader() {
   }, []);
 
   return (
-    <div className="center absolute">
+    <div className="center absolute flex flex-col items-center gap-2">
       <Loader2 className="animate-spin" />
       {showMessage && (
         <p className="animate-fadeIn opacity-0">
-          First load may take a couple of seconds, since API is dormant.
+          First request may take up to 15 seconds while the server wakes up.
         </p>
       )}
     </div>
